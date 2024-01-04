@@ -1,0 +1,10 @@
+{
+  "public": {
+    "name": "My App",
+    "languages": ["de", "en"]
+  },
+  "systemMail": {
+    "siteName": "My App Mail Service",
+    "from": "My App Mail Service <noreply@example.com>"
+  }
+}

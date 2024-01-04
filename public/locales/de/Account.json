@@ -1,0 +1,9 @@
+{
+  "title": "Benutzer",
+  "current password": "Aktuelles Passwort",
+  "new password": "Neues Passwort",
+  "confirm new password": "Neues Passwort bestätigen",
+  "password successfully changed": "Das Passwort wurde erfolgreich geändert.",
+  "submit": "Speichern",
+  "reset": "Nochmal"
+}
