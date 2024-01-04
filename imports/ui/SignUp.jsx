@@ -17,7 +17,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
-  const { t } = useTranslation(["SignUp"]);
+  const { t, i18n } = useTranslation(["SignUp"]);
 
   const steps = [t("Enter Email"), t("Check your inbox")];
 
@@ -26,10 +26,9 @@ const SignUp = () => {
   };
 
   const onSubmit = async (e) => {
-    // Perform registration logic here
     e.preventDefault();
     try {
-      await Meteor.callAsync("user.signup", email);
+      await Meteor.callAsync("user.signup", email, i18n.language);
       setActiveStep(1);
     } catch (error) {
       setError(error.reason);

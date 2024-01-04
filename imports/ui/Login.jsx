@@ -42,6 +42,7 @@ const Login = () => {
               <TextField
                 label={t("email")}
                 error={!!error}
+                autoComplete="username"
                 variant="outlined"
                 margin="normal"
                 value={email}
@@ -49,6 +50,7 @@ const Login = () => {
               />
               <TextField
                 label={t("password")}
+                autoComplete="current-password"
                 error={!!error}
                 variant="outlined"
                 margin="normal"

@@ -9,7 +9,7 @@ full i18n support.
 - React 18.2
 - React router 6.21
 - Mui 5.15
-- React-i18n
+- React-i18n (use of i18n on server and client)
 
 ## Setup
 

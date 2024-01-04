@@ -7,12 +7,14 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { I18nContext, useTranslation } from "react-i18next";
+import { useCurrentUser } from "./UserProvider";
 
 export const ChooseLanguage = ({ variant }) => {
   const { i18n } = useContext(I18nContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const user = useCurrentUser();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,8 +25,23 @@ export const ChooseLanguage = ({ variant }) => {
   };
   const { t } = useTranslation(["translation", "ChooseLanguage"]);
 
-  const changeLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
+  const changeLanguage = async (value) => {
+    if (user) {
+      try {
+        await Meteor.users.updateAsync(user._id, {
+          $set: {
+            profile: { language: value },
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    i18n.changeLanguage(value);
+  };
+
+  const onChange = async (e) => {
+    changeLanguage(e.target.value);
   };
 
   if (variant === "iconbutton") {
@@ -61,8 +78,8 @@ export const ChooseLanguage = ({ variant }) => {
               <MenuItem
                 key={lang}
                 onClick={() => {
+                  changeLanguage(lang);
                   handleClose();
-                  i18n.changeLanguage(lang);
                 }}
               >
                 {t(lang, { ns: "ChooseLanguage" })}
@@ -89,7 +106,7 @@ export const ChooseLanguage = ({ variant }) => {
           />
         }
         labelId="sel-lang"
-        onChange={changeLanguage}
+        onChange={onChange}
         value={i18n.language}
         label={t("language", { ns: "ChooseLanguage" })}
       >

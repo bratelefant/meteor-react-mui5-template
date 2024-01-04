@@ -26,7 +26,6 @@ export const ForgotPassword = () => {
   };
 
   const onSubmit = (e) => {
-    // Perform registration logic here
     e.preventDefault();
     Accounts.forgotPassword({ email }, (err) => {
       if (err) {

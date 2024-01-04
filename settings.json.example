@@ -1,7 +1,8 @@
 {
   "public": {
     "name": "My App",
-    "languages": ["de", "en"]
+    "languages": ["de", "en"],
+    "defaultLanguage": "en"
   },
   "systemMail": {
     "siteName": "My App Mail Service",

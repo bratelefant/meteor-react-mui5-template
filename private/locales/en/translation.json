@@ -1,0 +1,14 @@
+{
+  "email": "Email Address",
+  "password": "Password",
+  "mail": {
+    "enroll": {
+      "subject": "Welcome to {{appName}}",
+      "body": "Hi,\n\nyou have been enrolled in {{appName}}.\n\nYou can login at: {{url}}\n\nThanks,\n{{appName}}"
+    },
+    "resetPassword": {
+      "subject": "Your new password for {{appName}}",
+      "body": "Hi,\n\nyou have asked us to reset your password.\n\nFollow this link to set a new password: {{url}}\n\nThanks,\n{{appName}}"
+    }
+  }
+}

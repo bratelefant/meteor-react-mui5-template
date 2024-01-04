@@ -1,0 +1,14 @@
+{
+  "email": "Email-Adresse",
+  "password": "Passwort",
+  "mail": {
+    "enroll": {
+      "subject": "Willkommen zu {{appName}}",
+      "body": "Hallo,\n\nSie haben einen Account für {{appName}} erstellt.\n\nSie können sich anmelden, indem Sie diesem Link folgen: {{url}}\n\nBeste Grüße,\n{{appName}}"
+    },
+    "resetPassword": {
+      "subject": "Passwort zurücksetzen für {{appName}}",
+      "body": "Hallo,\n\nSie haben Ihr Passwort für {{appName}} zurückgesetzt.\n\nSie können ein neues Passwort setzen, indem Sie diesem Link folgen: {{url}}\n\nBeste Grüße,\n{{appName}}"
+    }
+  }
+}

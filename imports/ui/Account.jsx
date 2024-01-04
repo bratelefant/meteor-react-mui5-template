@@ -14,6 +14,7 @@ import {
 import { Accounts } from "meteor/accounts-base";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useCurrentUser } from "./UserProvider";
 
 export const Account = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -22,6 +23,7 @@ export const Account = () => {
   const [error, setError] = useState({});
   const [success, setSuccess] = useState();
   const { t } = useTranslation(["Account"]);
+  const user = useCurrentUser();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -58,8 +60,14 @@ export const Account = () => {
               </Box>
             ) : (
               <Stack spacing={1}>
+                <input
+                  type="hidden"
+                  style={{ display: "none" }}
+                  value={user?.emails?.find((e) => e.verified)?.address || ""}
+                />
                 <TextField
                   id="oldPassword"
+                  autoComplete="current-password"
                   label={t("current password")}
                   variant="outlined"
                   margin="normal"
@@ -71,6 +79,7 @@ export const Account = () => {
                 />
                 <TextField
                   id="password"
+                  autoComplete="new-password"
                   error={!!error["password"]}
                   helperText={error["password"]}
                   label={t("new password")}
@@ -82,6 +91,7 @@ export const Account = () => {
                 />
                 <TextField
                   id="passwordConfirm"
+                  autoComplete="new-password"
                   error={!!error["passwordConfirm"]}
                   helperText={error["passwordConfirm"]}
                   label={t("confirm new password")}
