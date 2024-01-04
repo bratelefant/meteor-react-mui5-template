@@ -1,4 +1,4 @@
-# meteor-react-mui5-templat
+# meteor-react-mui5-template
 
 This is a starter for a Meteor + React + Material UI 5 project. It provides all user account logic and provides
 full i18n support.
