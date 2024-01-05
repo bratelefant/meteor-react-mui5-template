@@ -1,3 +1,10 @@
+/**
+ * Manage the user account.
+ *
+ * @locus Client
+ * @module imports/ui/Account
+ */
+
 import React, { useState } from 'react';
 import {
   Alert,
@@ -15,6 +22,11 @@ import { Accounts } from 'meteor/accounts-base';
 import { useTranslation } from 'react-i18next';
 import { useCurrentUser } from './UserProvider';
 
+/**
+ * @function Account
+ * @description React component that provides a form to change the password of the current user.
+ * @returns {JSX.Element} - Account
+ */
 function Account() {
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');

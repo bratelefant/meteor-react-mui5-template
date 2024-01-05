@@ -1,5 +1,8 @@
 /**
- * @module SignUp
+ * A signup Component.
+ *
+ * @locus Client
+ * @module imports/ui/SignUp
  */
 import React, { useState } from 'react';
 import {
@@ -17,8 +20,12 @@ import {
 import { useTranslation } from 'react-i18next';
 
 /**
- * Display a sign up form.
- * @returns {ReactNode} The component displayed.
+ * @function SignUp
+ * @description React component that provides a simple stepper to sign up a new user. Only an email
+ * is required. We do not want to ask for a password here, because we want to send a link to the
+ * user's email address to set the password. This way we can be sure that
+ * the email address is valid.
+ * @returns {ReactNode} - The component displayed.
  */
 function SignUp() {
   const [email, setEmail] = useState('');

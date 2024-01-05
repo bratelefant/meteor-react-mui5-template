@@ -1,3 +1,9 @@
+/**
+ * ForgotPassword component.
+ *
+ * @locus Client
+ * @module imports/ui/ForgotPassword
+ */
 import React, { useState } from 'react';
 import {
   TextField,
@@ -13,6 +19,11 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * @function ForgotPassword
+ * @description React component that provides a simple stepper to reset the password.
+ * @returns {JSX.Element} - ForgotPassword
+ */
 function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [activeStep, setActiveStep] = useState(0);

@@ -1,3 +1,9 @@
+/**
+ * Enroll component.
+ *
+ * @locus Client
+ * @module imports/ui/Enroll
+ */
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -15,6 +21,12 @@ import { Accounts } from 'meteor/accounts-base';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * @function Enroll
+ * @description React component that provides a stepper to enroll a new user. The form is
+ * used to set the password for the new user. Will be called from the link in the enrollment email.
+ * @returns {JSX.Element} - Enroll
+ */
 function Enroll() {
   const [password, setPassword] = useState('');
   const [activeStep, setActiveStep] = useState(0);

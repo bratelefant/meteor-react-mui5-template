@@ -1,3 +1,9 @@
+/**
+ * Main application component.
+ *
+ * @locus Client
+ * @module imports/ui/App
+ */
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';

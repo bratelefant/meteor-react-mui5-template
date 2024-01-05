@@ -7,6 +7,8 @@
 This is a starter for a Meteor + React + Material UI 5 project. It provides all user account logic and provides
 full i18n support.
 
+Generated API docs are available at [bratelefant.github.io/meteor-react-mui5-template](https://bratelefant.github.io/meteor-react-mui5-template/index.html)
+
 ## Features
 
 - Meteor 2.14

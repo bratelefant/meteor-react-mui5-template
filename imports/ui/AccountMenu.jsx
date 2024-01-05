@@ -1,9 +1,20 @@
+/**
+ * Displays a menu to access the account page and to logout.
+ *
+ * @locus Client
+ * @module imports/ui/AccountMenu
+ */
 import React, { useEffect } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * @function AccountMenu
+ * @description React component that provides a menu to access the account page and to logout.
+ * @returns {JSX.Element} - AccountMenu
+ */
 function AccountMenu() {
   const navigate = useNavigate();
   const location = useLocation();

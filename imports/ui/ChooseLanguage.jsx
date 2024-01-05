@@ -1,3 +1,9 @@
+/**
+ * React component that provides a menu to choose the language.
+ *
+ * @locus Client
+ * @module imports/ui/ChooseLanguage
+ */
 import { Language } from '@mui/icons-material';
 import {
   FormControl,
@@ -12,7 +18,15 @@ import { I18nContext, useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useCurrentUser } from './UserProvider';
 
-function ChooseLanguage({ variant }) {
+/**
+ * @function Allows the user to choose the language. The state will also be saved in the users
+ * profile, so that server side texts (e.g. for emails) can be translated properly.
+ * @param {Object} props - React props.
+ * @param {('iconbutton'|'select')} [props.variant] - The variant of the component.
+ * Default is 'select'.
+ * @returns {JSX.Element} - React component.
+ */
+function ChooseLanguage({ variant = 'select' }) {
   const { i18n } = useContext(I18nContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useCurrentUser();

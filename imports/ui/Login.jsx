@@ -1,3 +1,9 @@
+/**
+ * Login component.
+ *
+ * @locus Client
+ * @module imports/ui/Login
+ */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -9,9 +15,10 @@ import ChooseLanguage from './ChooseLanguage';
 import Loading from './Loading';
 
 /**
- * Display a login form.
- *
- * @returns {ReactNode} The component displayed.
+ * @function Login
+ * @description React component that provides a form to login a user. This also includes
+ * a link to the sign up form and a link to the forgotten password form.
+ * @returns {ReactNode} - The component displayed.
  */
 function Login() {
   const { t } = useTranslation(['translation', 'Login']);

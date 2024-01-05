@@ -1,3 +1,9 @@
+/**
+ * Reset password component.
+ *
+ * @locus Client
+ * @module imports/ui/ResetPassword
+ */
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -16,9 +22,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 /**
- * Display a reset password form.
- *
- * @returns {ReactNode} The component displayed.
+ * @function ResetPassword
+ * @description React component that provides a stepper to reset the password. The form is
+ * used to set the password for the new user. Will be called from the link in the forgotten
+ * password email.
+ * @returns {ReactNode} - The component displayed.
  */
 function ResetPassword() {
   const [password, setPassword] = useState('');

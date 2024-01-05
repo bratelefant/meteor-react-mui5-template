@@ -1,3 +1,9 @@
+/**
+ * Menu drawer component.
+ *
+ * @locus Client
+ * @module imports/ui/MenuDrawer
+ */
 import React, { useEffect } from 'react';
 import { Home } from '@mui/icons-material';
 import {
@@ -17,9 +23,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 /**
- * Display a menu drawer.
- *
- * @returns {ReactNode} The component displayed.
+ * @function MenuDrawer
+ * @description React component that provides a drawer menu. Includes tha logo and app
+ * name on top and a link to the home page.
+ * @returns {ReactNode} - The component displayed.
  */
 export default function MenuDrawer() {
   const navigate = useNavigate();

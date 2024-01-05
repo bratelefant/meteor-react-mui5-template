@@ -1,3 +1,9 @@
+/**
+ * The main application menu.
+ *
+ * @locus Client
+ * @module imports/ui/AppMenu
+ */
 import React from 'react';
 import {
   Typography,
@@ -10,6 +16,11 @@ import ChooseLanguage from './ChooseLanguage';
 import { useCurrentUser } from './UserProvider';
 import AccountMenu from './AccountMenu';
 
+/**
+ * @function AppMenu
+ * @description The main application menu.
+ * @returns {JSX.Element} - AppMenu
+ */
 function AppMenu() {
   const location = useLocation();
   const user = useCurrentUser();
