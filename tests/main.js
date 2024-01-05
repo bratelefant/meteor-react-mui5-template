@@ -1,16 +1,16 @@
-import assert from "assert";
-import "./user.server.tests";
-import "./ui/welcome.tests";
+import assert from 'assert';
+import './user.server.tests';
+import './ui/welcome.tests';
 
-describe("default", function () {
+describe('default', () => {
   if (Meteor.isClient) {
-    it("client is not server", function () {
+    it('client is not server', () => {
       assert.strictEqual(Meteor.isServer, false);
     });
   }
 
   if (Meteor.isServer) {
-    it("server is not client", function () {
+    it('server is not client', () => {
       assert.strictEqual(Meteor.isClient, false);
     });
   }

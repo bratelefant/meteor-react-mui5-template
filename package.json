@@ -1,11 +1,11 @@
 {
-  "name": "myApp",
+  "name": "my-app",
   "private": true,
   "scripts": {
-    "start": "meteor run",
-    "test": "meteor test --once --driver-package meteortesting:mocha",
-    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "visualize": "meteor --production --extra-packages bundle-visualizer"
+    "start": "cp -n settings.json.example settings.json ; meteor run --settings settings.json",
+    "lint" : "eslint .",
+    "lint:fix" : "eslint . --fix",
+    "test": "meteor test --once --driver-package meteortesting:mocha --settings settings.json.example"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.5",
@@ -34,6 +34,12 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.2.0",
-    "@testing-library/react": "^14.1.2"
+    "@testing-library/react": "^14.1.2",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

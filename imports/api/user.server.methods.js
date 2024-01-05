@@ -1,8 +1,8 @@
-import { UserSrv } from "./user.server";
-import { check } from "meteor/check";
+import { check } from 'meteor/check';
+import UserSrv from './user.server';
 
 Meteor.methods({
-  async "user.signup"(email, language) {
+  'user.signup': async (email, language) => {
     check(email, String);
     check(language, String);
     await UserSrv.signup(email, language);

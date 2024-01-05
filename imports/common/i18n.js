@@ -1,8 +1,8 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import Backend from "i18next-http-backend";
-import ServerBackend from "i18next-fs-backend";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from 'i18next-http-backend';
+import ServerBackend from 'i18next-fs-backend';
 
 if (Meteor.isClient) {
   i18n
@@ -16,7 +16,7 @@ if (Meteor.isClient) {
         escapeValue: false,
       },
       backend: {
-        loadPath: "/locales/{{lng}}/{{ns}}.json",
+        loadPath: '/locales/{{lng}}/{{ns}}.json',
       },
     });
 }
@@ -28,9 +28,8 @@ if (Meteor.isServer) {
     fallbackLng: Meteor.settings.public.defaultLanguage,
     saveMissing: Meteor.isDevelopment,
     backend: {
-      loadPath: (lngs, namespace) =>
-        Assets.absoluteFilePath("locales/" + lngs + "/" + namespace + ".json"),
-      addPath: process.env.PWD + "/private/locales/{{lng}}/{{ns}}.missing.json",
+      loadPath: (lngs, namespace) => Assets.absoluteFilePath(`locales/${lngs}/${namespace}.json`),
+      addPath: `${process.env.PWD}/private/locales/{{lng}}/{{ns}}.missing.json`,
     },
   });
 }
