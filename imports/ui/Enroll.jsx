@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import {
   Stack,
   Step,
@@ -10,19 +10,19 @@ import {
   StepLabel,
   Stepper,
   Typography,
-} from "@mui/material";
-import { Accounts } from "meteor/accounts-base";
-import { useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+} from '@mui/material';
+import { Accounts } from 'meteor/accounts-base';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-const Enroll = () => {
-  const [password, setPassword] = useState("");
+function Enroll() {
+  const [password, setPassword] = useState('');
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('');
   const { token } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Enroll"]);
+  const { t } = useTranslation(['Enroll']);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -36,15 +36,14 @@ const Enroll = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setActiveStep(1);
-      setError(t("Passwords do not match"));
+      setError(t('Passwords do not match'));
     } else {
       Accounts.resetPassword(token, password, (err) => {
         if (err) {
-          console.error(err);
           setError(
-            err.reason?.includes("Token expired")
-              ? t("Token expired")
-              : err.reason
+            err.reason?.includes('Token expired')
+              ? t('Token expired')
+              : err.reason,
           );
         } else {
           setError(null);
@@ -54,7 +53,7 @@ const Enroll = () => {
     }
   };
 
-  const steps = [t("choose password"), t("confirm password"), t("done")];
+  const steps = [t('choose password'), t('confirm password'), t('done')];
 
   return (
     <Container maxWidth="sm">
@@ -82,14 +81,14 @@ const Enroll = () => {
                         <TextField
                           autoFocus
                           sx={{ m: 1 }}
-                          label={t("password", { ns: "Enroll" })}
+                          label={t('password', { ns: 'Enroll' })}
                           type="password"
                           autoComplete="new-password"
                           value={password}
                           onChange={handlePasswordChange}
                         />
                         <Button variant="contained" type="submit">
-                          {t("continue")}
+                          {t('continue')}
                         </Button>
                       </Stack>
                     </form>
@@ -104,7 +103,7 @@ const Enroll = () => {
                           helperText={error}
                           aria-errormessage="Passwörter stimmen nicht überein"
                           sx={{ m: 1 }}
-                          label={t("confirm password")}
+                          label={t('confirm password')}
                           type="password"
                           value={confirmPassword}
                           onChange={handleConfirmPasswordChange}
@@ -115,14 +114,14 @@ const Enroll = () => {
                           color="primary"
                           type="submit"
                         >
-                          {t("continue")}
+                          {t('continue')}
                         </Button>
                         <Button
                           disabled={index !== 1}
                           onClick={() => setActiveStep(0)}
                           sx={{ mt: 1, mr: 1 }}
                         >
-                          {t("back")}
+                          {t('back')}
                         </Button>
                       </Stack>
                     </form>
@@ -130,13 +129,13 @@ const Enroll = () => {
                   {index === 2 && (
                     <Stack spacing={1}>
                       <Typography variant="h4" color="textSecondary">
-                        {t("Registration successful")}
+                        {t('Registration successful')}
                       </Typography>
                       <Typography variant="body1">
-                        {t("You can now log in with your new password.")}
+                        {t('You can now log in with your new password.')}
                       </Typography>
-                      <Button variant="contained" onClick={() => navigate("/")}>
-                        {t("start")}
+                      <Button variant="contained" onClick={() => navigate('/')}>
+                        {t('start')}
                       </Button>
                     </Stack>
                   )}
@@ -145,10 +144,10 @@ const Enroll = () => {
             </Step>
           ))}
         </Stepper>
-        <Stack spacing={1}></Stack>
+        <Stack spacing={1} />
       </Box>
     </Container>
   );
-};
+}
 
 export default Enroll;

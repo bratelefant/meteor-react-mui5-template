@@ -1,16 +1,18 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Box, Container, TextField, Button, Stack } from "@mui/material";
-import { Welcome } from "./Welcome";
-import { ChooseLanguage } from "./ChooseLanguage";
-import { Loading } from "./Loading";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import {
+  Box, Container, TextField, Button, Stack,
+} from '@mui/material';
+import Welcome from './Welcome';
+import ChooseLanguage from './ChooseLanguage';
+import Loading from './Loading';
 
-const Login = () => {
-  const { t } = useTranslation(["translation", "Login"]);
+function Login() {
+  const { t } = useTranslation(['translation', 'Login']);
   const navigate = useNavigate();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState(null);
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ const Login = () => {
         setError(err.reason);
       } else {
         setError(undefined);
-        navigate("/");
+        navigate('/');
       }
     });
   };
@@ -40,7 +42,7 @@ const Login = () => {
               <Welcome />
 
               <TextField
-                label={t("email")}
+                label={t('email')}
                 error={!!error}
                 autoComplete="username"
                 variant="outlined"
@@ -49,7 +51,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
-                label={t("password")}
+                label={t('password')}
                 autoComplete="current-password"
                 error={!!error}
                 variant="outlined"
@@ -66,32 +68,32 @@ const Login = () => {
                 color="primary"
                 size="large"
               >
-                {t("Login:signin")}
+                {t('Login:signin')}
               </Button>
               <Button
                 variant="contained"
                 color="secondary"
                 size="large"
-                onClick={() => navigate("/sign-up")}
+                onClick={() => navigate('/sign-up')}
               >
-                {t("Login:signup")}
+                {t('Login:signup')}
               </Button>
               <Button
                 variant="text"
                 size="small"
-                onClick={() => navigate("/forgotten-password")}
+                onClick={() => navigate('/forgotten-password')}
               >
-                {t("Login:forgottenPassword")}
+                {t('Login:forgottenPassword')}
               </Button>
             </Stack>
           </form>
         </Box>
-        <Box sx={{ position: "absolute", top: 16, right: 16 }}>
+        <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
           <ChooseLanguage />
         </Box>
       </Container>
     </>
   );
-};
+}
 
 export default Login;

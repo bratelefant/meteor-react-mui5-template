@@ -19,6 +19,7 @@
     "afterEach": "readonly"
   },
   "rules": {
-    "import/no-unresolved": [2, { "ignore": ["^meteor/"] }]
+    "import/no-unresolved": [2, { "ignore": ["^meteor/"] }],
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
   }
 }

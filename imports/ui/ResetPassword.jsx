@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import {
   Stack,
   Step,
@@ -10,18 +10,18 @@ import {
   StepLabel,
   Stepper,
   Typography,
-} from "@mui/material";
-import { Accounts } from "meteor/accounts-base";
-import { useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+} from '@mui/material';
+import { Accounts } from 'meteor/accounts-base';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-const ResetPassword = () => {
-  const [password, setPassword] = useState("");
+function ResetPassword() {
+  const [password, setPassword] = useState('');
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('');
   const { token } = useParams();
-  const { t } = useTranslation(["ResetPassword"]);
+  const { t } = useTranslation(['ResetPassword']);
   const navigate = useNavigate();
 
   const handlePasswordChange = (event) => {
@@ -36,15 +36,14 @@ const ResetPassword = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setActiveStep(1);
-      setError(t("passwords do not match"));
+      setError(t('passwords do not match'));
     } else {
       Accounts.resetPassword(token, password, (err) => {
         if (err) {
-          console.error(err);
           setError(
-            err.reason?.includes("Token expired")
-              ? t("token expired")
-              : err.reason
+            err.reason?.includes('Token expired')
+              ? t('token expired')
+              : err.reason,
           );
         } else {
           setError(null);
@@ -54,7 +53,7 @@ const ResetPassword = () => {
     }
   };
 
-  const steps = [t("choose password"), t("confirm password"), t("done")];
+  const steps = [t('choose password'), t('confirm password'), t('done')];
 
   return (
     <Container maxWidth="sm">
@@ -82,14 +81,14 @@ const ResetPassword = () => {
                         <TextField
                           autoFocus
                           sx={{ m: 1 }}
-                          label={t("password")}
+                          label={t('password')}
                           autoComplete="new-password"
                           type="password"
                           value={password}
                           onChange={handlePasswordChange}
                         />
                         <Button variant="contained" type="submit">
-                          {t("continue")}
+                          {t('continue')}
                         </Button>
                       </Stack>
                     </form>
@@ -103,7 +102,7 @@ const ResetPassword = () => {
                           error={!!error}
                           helperText={error}
                           sx={{ m: 1 }}
-                          label={t("confirm password")}
+                          label={t('confirm password')}
                           type="password"
                           value={confirmPassword}
                           onChange={handleConfirmPasswordChange}
@@ -114,14 +113,14 @@ const ResetPassword = () => {
                           color="primary"
                           type="submit"
                         >
-                          {t("continue")}
+                          {t('continue')}
                         </Button>
                         <Button
                           disabled={index !== 1}
                           onClick={() => setActiveStep(0)}
                           sx={{ mt: 1, mr: 1 }}
                         >
-                          {t("back")}
+                          {t('back')}
                         </Button>
                       </Stack>
                     </form>
@@ -130,13 +129,13 @@ const ResetPassword = () => {
                   {index === 2 && (
                     <Stack spacing={1}>
                       <Typography variant="h4" color="textSecondary">
-                        {t("success")}
+                        {t('success')}
                       </Typography>
                       <Typography variant="body1">
-                        {t("password successfully changed")}
+                        {t('password successfully changed')}
                       </Typography>
-                      <Button variant="contained" onClick={() => navigate("/")}>
-                        {t("back to home")}
+                      <Button variant="contained" onClick={() => navigate('/')}>
+                        {t('back to home')}
                       </Button>
                     </Stack>
                   )}
@@ -148,6 +147,6 @@ const ResetPassword = () => {
       </Box>
     </Container>
   );
-};
+}
 
 export default ResetPassword;

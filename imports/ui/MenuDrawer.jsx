@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Home } from "@mui/icons-material";
+import React, { useEffect } from 'react';
+import { Home } from '@mui/icons-material';
 import {
   Box,
   Divider,
@@ -11,27 +11,28 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function MenuDrawer() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const { t } = useTranslation("MenuDrawer");
+  const { t } = useTranslation('MenuDrawer');
+  const { location } = useLocation();
 
   const { pathname } = location;
 
-  const toggleDrawer = (open) => (event) => {
+  const toggleDrawer = (pOpen) => (event) => {
     if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event.type === 'keydown'
+      && (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
 
-    setOpen(open);
+    setOpen(pOpen);
   };
 
   useEffect(() => {
@@ -40,44 +41,42 @@ export default function MenuDrawer() {
 
   return (
     <div>
-      <React.Fragment>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-          onClick={() => setOpen(true)}
+      <IconButton
+        size="large"
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        sx={{ mr: 2 }}
+        onClick={() => setOpen(true)}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Drawer open={open} onClose={() => setOpen(false)}>
+        <Box
+          sx={{ width: 'auto', minWidth: '230px' }}
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
         >
-          <MenuIcon />
-        </IconButton>
-        <Drawer open={open} onClose={() => setOpen(false)}>
-          <Box
-            sx={{ width: "auto", minWidth: "230px" }}
-            role="presentation"
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
-          >
-            <List>
-              <ListItem>
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <Icon component="img" src="/images/logo.png" alt="Logo" />
+              </ListItemIcon>
+              <ListItemText primary={Meteor.settings.public.name} />
+            </ListItem>
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate('/')}>
                 <ListItemIcon>
-                  <Icon component={"img"} src={"/images/logo.png"} alt="Logo" />
+                  <Home />
                 </ListItemIcon>
-                <ListItemText primary={Meteor.settings.public.name} />
-              </ListItem>
-              <Divider />
-              <ListItem disablePadding>
-                <ListItemButton onClick={() => navigate("/")}>
-                  <ListItemIcon>
-                    <Home />
-                  </ListItemIcon>
-                  <ListItemText primary={t("home")} />
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Box>
-        </Drawer>
-      </React.Fragment>
+                <ListItemText primary={t('home')} />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
     </div>
   );
 }

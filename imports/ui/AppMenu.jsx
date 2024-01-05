@@ -1,42 +1,25 @@
-import React from "react";
+import React from 'react';
 import {
   Typography,
   AppBar,
   Toolbar,
-  IconButton,
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MenuDrawer from "./MenuDrawer";
-import { useNavigate, useLocation } from "react-router-dom";
-import { ChooseLanguage } from "./ChooseLanguage";
-import { useTranslation } from "react-i18next";
-import { useCurrentUser } from "./UserProvider";
-import { AccountMenu } from "./AccountMenu";
+} from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import MenuDrawer from './MenuDrawer';
+import ChooseLanguage from './ChooseLanguage';
+import { useCurrentUser } from './UserProvider';
+import AccountMenu from './AccountMenu';
 
-export const AppMenu = () => {
-  const navigate = useNavigate();
+function AppMenu() {
   const location = useLocation();
   const user = useCurrentUser();
-  const { t } = useTranslation(["AppMenu"]);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   if (
-    !user ||
-    location.pathname.startsWith("/enroll") ||
-    location.pathname.startsWith("/reset-password") ||
-    location.pathname.startsWith("/login")
-  )
-    return null;
+    !user
+    || location.pathname.startsWith('/enroll')
+    || location.pathname.startsWith('/reset-password')
+    || location.pathname.startsWith('/login')
+  ) return null;
 
   return (
     <AppBar position="sticky">
@@ -50,4 +33,6 @@ export const AppMenu = () => {
       </Toolbar>
     </AppBar>
   );
-};
+}
+
+export default AppMenu;

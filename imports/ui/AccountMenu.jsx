@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import React, { useEffect } from 'react';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-export const AccountMenu = () => {
+function AccountMenu() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation(["AppMenu"]);
+  const { t } = useTranslation(['AppMenu']);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenu = (event) => {
@@ -41,35 +41,37 @@ export const AccountMenu = () => {
         id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
         keepMounted
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
         <MenuItem
           onClick={async () => {
-            navigate("/account");
+            navigate('/account');
             handleClose();
           }}
         >
-          {t("account")}
+          {t('account')}
         </MenuItem>
         <MenuItem
           onClick={async () => {
-            navigate("/");
+            navigate('/');
             Accounts.logout();
             handleClose();
           }}
         >
-          {t("logout")}
+          {t('logout')}
         </MenuItem>
       </Menu>
     </div>
   );
-};
+}
+
+export default AccountMenu;

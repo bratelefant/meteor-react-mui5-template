@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { Container, Box } from "@mui/material";
-import { Welcome } from "./Welcome";
-import { useNavigate } from "react-router-dom";
-import { useCurrentUser } from "./UserProvider";
+import React, { useEffect } from 'react';
+import { Container, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import Welcome from './Welcome';
+import { useCurrentUser } from './UserProvider';
 
-export const Home = () => {
+function Home() {
   const navigate = useNavigate();
   const user = useCurrentUser();
 
   useEffect(() => {
-    if (!user?._id) navigate("/login");
+    if (!user?._id) navigate('/login');
   }, [user?._id]);
 
   return (
@@ -19,4 +19,6 @@ export const Home = () => {
       </Container>
     </Box>
   );
-};
+}
+
+export default Home;

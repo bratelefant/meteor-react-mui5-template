@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "start": "cp -n settings.json.example settings.json ; meteor run --settings settings.json",
-    "lint" : "eslint .",
-    "lint:fix" : "eslint . --fix",
-    "test": "meteor test --once --driver-package meteortesting:mocha --settings settings.json.example"
+    "lint": "eslint . --ext .jsx,.js",
+    "lint:fix": "eslint . --ext .jsx,.js --fix",
+    "test": "meteor test m--once --driver-package meteortesting:mocha --settings settings.json.example",
+    "test:watch": "meteor test --driver-package meteortesting:mocha --settings settings.json.example"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.5",
@@ -19,6 +20,7 @@
     "i18next-fs-backend": "^2.3.1",
     "i18next-http-backend": "^2.4.2",
     "meteor-node-stubs": "^1.2.7",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.0",

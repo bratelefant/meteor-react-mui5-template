@@ -1,4 +1,4 @@
-import { Language } from "@mui/icons-material";
+import { Language } from '@mui/icons-material';
 import {
   FormControl,
   IconButton,
@@ -6,12 +6,13 @@ import {
   Menu,
   MenuItem,
   Select,
-} from "@mui/material";
-import React, { useContext } from "react";
-import { I18nContext, useTranslation } from "react-i18next";
-import { useCurrentUser } from "./UserProvider";
+} from '@mui/material';
+import React, { useContext } from 'react';
+import { I18nContext, useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import { useCurrentUser } from './UserProvider';
 
-export const ChooseLanguage = ({ variant }) => {
+function ChooseLanguage({ variant }) {
   const { i18n } = useContext(I18nContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useCurrentUser();
@@ -23,7 +24,7 @@ export const ChooseLanguage = ({ variant }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { t } = useTranslation(["translation", "ChooseLanguage"]);
+  const { t } = useTranslation(['translation', 'ChooseLanguage']);
 
   const changeLanguage = async (value) => {
     if (user) {
@@ -40,7 +41,7 @@ export const ChooseLanguage = ({ variant }) => {
     changeLanguage(e.target.value);
   };
 
-  if (variant === "iconbutton") {
+  if (variant === 'iconbutton') {
     return (
       <div>
         <IconButton
@@ -58,30 +59,28 @@ export const ChooseLanguage = ({ variant }) => {
           id="menu-appbar"
           anchorEl={anchorEl}
           anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
           keepMounted
           transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {Meteor.settings.public.languages.map((lang) => {
-            return (
-              <MenuItem
-                key={lang}
-                onClick={() => {
-                  changeLanguage(lang);
-                  handleClose();
-                }}
-              >
-                {t(lang, { ns: "ChooseLanguage" })}
-              </MenuItem>
-            );
-          })}
+          {Meteor.settings.public.languages.map((lang) => (
+            <MenuItem
+              key={lang}
+              onClick={() => {
+                changeLanguage(lang);
+                handleClose();
+              }}
+            >
+              {t(lang, { ns: 'ChooseLanguage' })}
+            </MenuItem>
+          ))}
         </Menu>
       </div>
     );
@@ -90,30 +89,34 @@ export const ChooseLanguage = ({ variant }) => {
   return (
     <FormControl>
       <InputLabel id="sel-lang">
-        {t("language", { ns: "ChooseLanguage" })}
+        {t('language', { ns: 'ChooseLanguage' })}
       </InputLabel>
       <Select
         size="small"
-        startAdornment={
+        startAdornment={(
           <Language
             fontSize="inherit"
             color="textSecondary"
             sx={{ marginRight: 1 }}
           />
-        }
+        )}
         labelId="sel-lang"
         onChange={onChange}
         value={i18n.language}
-        label={t("language", { ns: "ChooseLanguage" })}
+        label={t('language', { ns: 'ChooseLanguage' })}
       >
-        {Meteor.settings.public.languages.map((lang) => {
-          return (
-            <MenuItem key={lang} value={lang}>
-              {lang}
-            </MenuItem>
-          );
-        })}
+        {Meteor.settings.public.languages.map((lang) => (
+          <MenuItem key={lang} value={lang}>
+            {lang}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
+}
+
+ChooseLanguage.propTypes = {
+  variant: PropTypes.oneOf(['iconbutton', 'select']).isRequired,
 };
+
+export default ChooseLanguage;

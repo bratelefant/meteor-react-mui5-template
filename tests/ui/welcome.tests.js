@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { expect } from 'chai';
 import { I18nextProvider } from 'react-i18next';
-import { Welcome } from '../../imports/ui/Welcome';
+import Welcome from '../../imports/ui/Welcome';
 import i18n from '../../imports/common/i18n';
 
 if (Meteor.isClient) {
@@ -25,7 +25,7 @@ if (Meteor.isClient) {
             appName: Meteor.settings.public.name,
           }),
         ),
-      ).to.exist();
+      ).to.be.instanceOf(HTMLElement);
     });
   });
 }

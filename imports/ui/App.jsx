@@ -1,24 +1,23 @@
-import React, { Suspense } from "react";
-import { Home } from "./Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import Enroll from "./Enroll";
-import ForgotPassword from "./ForgotPassword";
-import ResetPassword from "./ResetPassword";
-import { Account } from "./Account";
-import { AppMenu } from "./AppMenu";
-import { I18nextProvider } from "react-i18next";
-import i18n from "../../imports/common/i18n";
-import { Loading } from "./Loading";
-import { UserProvider } from "./UserProvider";
+import React, { Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { I18nextProvider } from 'react-i18next';
+import Home from './Home';
+import Login from './Login';
+import SignUp from './SignUp';
+import Enroll from './Enroll';
+import ForgotPassword from './ForgotPassword';
+import ResetPassword from './ResetPassword';
+import Account from './Account';
+import AppMenu from './AppMenu';
+import i18n from '../common/i18n';
+import Loading from './Loading';
+import { UserProvider } from './UserProvider';
 
-export const App = () => {
-  
+function App() {
   return (
-    <I18nextProvider i18n={i18n} defaultNS={"translation"}>
+    <I18nextProvider i18n={i18n} defaultNS="translation">
       <BrowserRouter>
-        <Suspense fallback={<Loading open={true} />}>
+        <Suspense fallback={<Loading open />}>
           <UserProvider>
             <AppMenu />
             <Routes>
@@ -38,4 +37,6 @@ export const App = () => {
       </BrowserRouter>
     </I18nextProvider>
   );
-};
+}
+
+export default App;
