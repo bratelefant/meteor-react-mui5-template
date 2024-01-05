@@ -37,7 +37,6 @@ UserSrv.configureEmails = function () {
 
   Accounts.emailTemplates.resetPassword = {
     subject(user) {
-      console.log(user);
       return i18n.t("mail.resetPassword.subject", {
         lng: user?.profile?.language || Meteor.settings.public.defaultLanguage,
         appName: Meteor.settings.public.name,

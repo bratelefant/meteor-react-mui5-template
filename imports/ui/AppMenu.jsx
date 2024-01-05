@@ -13,6 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ChooseLanguage } from "./ChooseLanguage";
 import { useTranslation } from "react-i18next";
 import { useCurrentUser } from "./UserProvider";
+import { AccountMenu } from "./AccountMenu";
 
 export const AppMenu = () => {
   const navigate = useNavigate();
@@ -45,52 +46,7 @@ export const AppMenu = () => {
           {Meteor.settings.public.name}
         </Typography>
         <ChooseLanguage variant="iconbutton" />
-        <div>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem
-              onClick={async () => {
-                navigate("/account");
-                handleClose();
-              }}
-            >
-              {t("account")}
-            </MenuItem>
-            <MenuItem
-              onClick={async () => {
-                navigate("/");
-                Accounts.logout();
-                handleClose();
-              }}
-            >
-              {t("logout")}
-            </MenuItem>
-          </Menu>
-        </div>
+        <AccountMenu />
       </Toolbar>
     </AppBar>
   );

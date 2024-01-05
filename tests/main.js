@@ -1,4 +1,6 @@
 import assert from "assert";
+import "./user.server.tests";
+import "./ui/welcome.tests";
 
 describe("default", function () {
   if (Meteor.isClient) {

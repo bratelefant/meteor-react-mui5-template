@@ -27,15 +27,11 @@ export const ChooseLanguage = ({ variant }) => {
 
   const changeLanguage = async (value) => {
     if (user) {
-      try {
-        await Meteor.users.updateAsync(user._id, {
-          $set: {
-            profile: { language: value },
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      await Meteor.users.updateAsync(user._id, {
+        $set: {
+          profile: { language: value },
+        },
+      });
     }
     i18n.changeLanguage(value);
   };

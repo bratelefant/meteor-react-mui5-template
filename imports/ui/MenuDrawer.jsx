@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Home } from "@mui/icons-material";
 import {
   Box,
@@ -13,13 +13,15 @@ import {
   ListItemText,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function MenuDrawer() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const { t } = useTranslation("MenuDrawer");
+
+  const { pathname } = location;
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -31,6 +33,10 @@ export default function MenuDrawer() {
 
     setOpen(open);
   };
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <div>
