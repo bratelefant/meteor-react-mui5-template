@@ -36,7 +36,7 @@ const Login = () => {
           height="100vh"
         >
           <form onSubmit={onSubmit}>
-            <Stack spacing={1}>
+            <Stack spacing={1} maxWidth={350}>
               <Welcome />
 
               <TextField

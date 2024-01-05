@@ -1,8 +1,4 @@
 import React, { useEffect } from "react";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
 import { Container, Box } from "@mui/material";
 import { Welcome } from "./Welcome";
 import { useNavigate } from "react-router-dom";
