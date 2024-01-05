@@ -7,7 +7,7 @@
     "lint:fix": "eslint . --ext .jsx,.js --fix",
     "test": "meteor test m--once --driver-package meteortesting:mocha --settings settings.json.example",
     "test:watch": "meteor test --driver-package meteortesting:mocha --settings settings.json.example",
-    "docs": "jsdoc imports/* -r  -c jsdoc.conf.json -d ./docs"
+    "docs": "jsdoc imports/* -r  -c jsdoc.conf.json -d ./.docs"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.5",
