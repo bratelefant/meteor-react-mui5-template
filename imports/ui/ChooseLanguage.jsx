@@ -7,7 +7,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import { I18nContext, useTranslation } from "react-i18next";
 import { useCurrentUser } from "./UserProvider";
 

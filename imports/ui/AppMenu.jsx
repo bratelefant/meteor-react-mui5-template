@@ -73,18 +73,18 @@ export const AppMenu = () => {
             onClose={handleClose}
           >
             <MenuItem
-              onClick={() => {
-                handleClose();
+              onClick={async () => {
                 navigate("/account");
+                handleClose();
               }}
             >
               {t("account")}
             </MenuItem>
             <MenuItem
-              onClick={() => {
-                handleClose();
+              onClick={async () => {
                 navigate("/");
                 Accounts.logout();
+                handleClose();
               }}
             >
               {t("logout")}

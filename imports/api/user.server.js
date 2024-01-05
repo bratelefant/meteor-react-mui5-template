@@ -1,4 +1,4 @@
-import i18n from "../../src/i18n";
+import i18n from "../../imports/common/i18n";
 
 export const UserSrv = {};
 

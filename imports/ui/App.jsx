@@ -9,7 +9,7 @@ import ResetPassword from "./ResetPassword";
 import { Account } from "./Account";
 import { AppMenu } from "./AppMenu";
 import { I18nextProvider } from "react-i18next";
-import i18n from "../../src/i18n";
+import i18n from "../../imports/common/i18n";
 import { Loading } from "./Loading";
 import { UserProvider } from "./UserProvider";
 
