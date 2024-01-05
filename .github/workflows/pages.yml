@@ -37,7 +37,7 @@ jobs:
           fetch-depth: 100
           submodules: recursive
       - run: npm i -g jsdoc
-      - run: npm run docs
+      - run: jsdoc imports/* -r  -c jsdoc.conf.json -d /tmp/bratelefant/meteor-react-mui5-template/docs
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Pages
@@ -45,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "./.docs"
+          path: "/tmp/bratelefant/meteor-react-mui5-template/docs"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
