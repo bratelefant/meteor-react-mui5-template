@@ -6,7 +6,8 @@
     "lint": "eslint . --ext .jsx,.js",
     "lint:fix": "eslint . --ext .jsx,.js --fix",
     "test": "meteor test m--once --driver-package meteortesting:mocha --settings settings.json.example",
-    "test:watch": "meteor test --driver-package meteortesting:mocha --settings settings.json.example"
+    "test:watch": "meteor test --driver-package meteortesting:mocha --settings settings.json.example",
+    "docs": "jsdoc imports/* -r  -c jsdoc.conf.json -d ./docs"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.5",
@@ -42,6 +43,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdoc": "^4.0.2"
   }
 }

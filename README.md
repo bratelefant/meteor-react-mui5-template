@@ -15,7 +15,14 @@ full i18n support.
 - Mui 5.15
 - React-i18n (use of i18n on server and client)
 
-## Setup
+## Run the app
 
-    meteor npm install
-    meteor run --settings settings.json.example
+    meteor npm start
+    
+## Testing
+
+    meteor npm test
+
+## Linting
+
+    meteor npm lint

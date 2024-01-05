@@ -15,6 +15,11 @@ import { Accounts } from 'meteor/accounts-base';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Display a reset password form.
+ *
+ * @returns {ReactNode} The component displayed.
+ */
 function ResetPassword() {
   const [password, setPassword] = useState('');
   const [activeStep, setActiveStep] = useState(0);

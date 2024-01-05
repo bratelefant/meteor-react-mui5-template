@@ -1,3 +1,6 @@
+/**
+ * @module SignUp
+ */
 import React, { useState } from 'react';
 import {
   TextField,
@@ -13,6 +16,10 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Display a sign up form.
+ * @returns {ReactNode} The component displayed.
+ */
 function SignUp() {
   const [email, setEmail] = useState('');
   const [activeStep, setActiveStep] = useState(0);

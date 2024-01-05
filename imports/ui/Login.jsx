@@ -8,6 +8,11 @@ import Welcome from './Welcome';
 import ChooseLanguage from './ChooseLanguage';
 import Loading from './Loading';
 
+/**
+ * Display a login form.
+ *
+ * @returns {ReactNode} The component displayed.
+ */
 function Login() {
   const { t } = useTranslation(['translation', 'Login']);
   const navigate = useNavigate();

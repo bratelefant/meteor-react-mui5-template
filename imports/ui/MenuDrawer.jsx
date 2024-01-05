@@ -16,6 +16,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Display a menu drawer.
+ *
+ * @returns {ReactNode} The component displayed.
+ */
 export default function MenuDrawer() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
