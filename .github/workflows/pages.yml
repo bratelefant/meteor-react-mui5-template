@@ -37,7 +37,7 @@ jobs:
           fetch-depth: 100
           submodules: recursive
       - run: npm i -g jsdoc
-      - run: jsdoc imports/* -r  -c jsdoc.conf.json -d /tmp/bratelefant/meteor-react-mui5-template/docs
+      - run: jsdoc imports/* --readme README.md -r -c jsdoc.conf.json -d /tmp/bratelefant/meteor-react-mui5-template/docs
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Pages
