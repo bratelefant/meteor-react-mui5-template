@@ -1,6 +1,10 @@
 import assert from 'assert';
-import './backend';
-import './ui';
+
+// eslint-disable-next-line global-require
+if (Meteor.isServer) { require('./backend'); }
+
+// eslint-disable-next-line global-require
+if (Meteor.isClient) { require('./ui'); }
 
 describe('default', () => {
   if (Meteor.isClient) {

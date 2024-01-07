@@ -1,15 +1,19 @@
 import {
-  render, fireEvent, screen, waitFor, cleanup,
+  cleanup,
+  fireEvent,
+  render,
+  screen, waitFor,
 } from '@testing-library/react';
-import { Navigate, BrowserRouter as Router } from 'react-router-dom';
-import React from 'react';
-import sinon from 'sinon';
-import { I18nextProvider } from 'react-i18next';
+import userEvent from '@testing-library/user-event';
 import chai, { expect } from 'chai';
 import chaiDom from 'chai-dom';
+import React from 'react';
+import { I18nextProvider } from 'react-i18next';
+import { Navigate, BrowserRouter as Router } from 'react-router-dom';
+import sinon from 'sinon';
 import i18n from '../../imports/common/i18n';
-import { UserProvider } from '../../imports/ui/UserProvider';
 import ChooseLanguage from '../../imports/ui/ChooseLanguage';
+import { UserProvider } from '../../imports/ui/UserProvider';
 
 if (Meteor.isClient) {
   chai.use(chaiDom);
@@ -21,6 +25,7 @@ if (Meteor.isClient) {
       sinon.stub(Accounts, 'logout');
       Meteor.user.returns({ _id: '123' });
       Meteor.userAsync.resolves({ _id: '123' }); // now Meteor.user() will return the user we just created
+      await i18n.changeLanguage('en');
       await i18n.loadNamespaces('ChooseLanguage');
     });
 
@@ -103,12 +108,9 @@ if (Meteor.isClient) {
         </Router>,
       );
       const select = screen.getByRole('combobox');
-      fireEvent(
-        select,
-        new MouseEvent('click', { bubbles: true, cancelable: true }),
-      );
+      await userEvent.click(select);
 
-      await waitFor(() => screen.getByText('en'));
+      await waitFor(() => screen.getAllByRole('option'));
 
       expect(screen.getAllByRole('option')).to.have.lengthOf(2);
     });
