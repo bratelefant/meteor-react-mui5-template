@@ -1,5 +1,6 @@
 [![Lint](https://github.com/bratelefant/meteor-react-mui5-template/actions/workflows/lint.yml/badge.svg)](https://github.com/bratelefant/meteor-react-mui5-template/actions/workflows/lint.yml)
 [![Server Tests](https://github.com/bratelefant/meteor-react-mui5-template/actions/workflows/server-tests.yml/badge.svg)](https://github.com/bratelefant/meteor-react-mui5-template/actions/workflows/server-tests.yml)
+[![UI Tests](https://github.com/bratelefant/meteor-react-mui5-template/actions/workflows/client-tests.yml/badge.svg)](https://github.com/bratelefant/meteor-react-mui5-template/actions/workflows/client-tests.yml)
 [![Code style: airbnb](https://img.shields.io/badge/code%20style-airbnb-blue.svg)](https://github.com/airbnb/javascript)
 
 # meteor-react-mui5-template
