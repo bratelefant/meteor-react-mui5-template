@@ -16,9 +16,12 @@
     "it": "readonly",
     "describe": "readonly",
     "beforeEach": "readonly",
-    "afterEach": "readonly"
+    "afterEach": "readonly",
+    "before": "readonly",
+    "after": "readonly"
   },
   "rules": {
+    "jsx-a11y/no-redundant-roles": [0],
     "import/no-unresolved": [2, { "ignore": ["^meteor/"] }],
     "no-underscore-dangle": ["error", { "allow": ["_id"] }]
   }

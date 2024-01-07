@@ -1,6 +1,6 @@
 import assert from 'assert';
-import './user.server.tests';
-import './ui/welcome.tests';
+import './backend';
+import './ui';
 
 describe('default', () => {
   if (Meteor.isClient) {

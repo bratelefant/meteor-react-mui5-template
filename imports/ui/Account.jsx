@@ -57,9 +57,11 @@ function Account() {
     });
   };
 
+  if (!user) return null;
+
   return (
     <Container maxWidth="sm">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} role="form">
         <Card>
           <CardHeader title={t('title')} />
           <CardContent>
@@ -80,6 +82,7 @@ function Account() {
                   id="oldPassword"
                   autoComplete="current-password"
                   label={t('current password')}
+                  name="oldPassword"
                   variant="outlined"
                   margin="normal"
                   type="password"
@@ -91,6 +94,7 @@ function Account() {
                 <TextField
                   id="password"
                   autoComplete="new-password"
+                  name="newPassword"
                   error={!!error.password}
                   helperText={error.password}
                   label={t('new password')}
@@ -103,6 +107,7 @@ function Account() {
                 <TextField
                   id="passwordConfirm"
                   autoComplete="new-password"
+                  name="newPasswordConfirm"
                   error={!!error.passwordConfirm}
                   helperText={error.passwordConfirm}
                   label={t('confirm new password')}

@@ -1,4 +1,5 @@
 {
   "email": "Email-Adresse",
-  "password": "Passwort"
+  "password": "Passwort",
+  "not logged in" : "Du musst angemeldet sein, um diese Seite zu sehen."
 }

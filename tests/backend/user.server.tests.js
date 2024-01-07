@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
-import UserSrv from '../imports/api/user.server';
-import i18n from '../imports/common/i18n';
+import UserSrv from '../../imports/api/user.server';
+import i18n from '../../imports/common/i18n';
 
 if (Meteor.isServer) {
   describe('UserSrv', () => {
