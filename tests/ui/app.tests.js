@@ -39,6 +39,7 @@ if (Meteor.isClient) {
       render(
         <App />,
       );
+      expect(window.location.pathname).to.be.equal('/login');
     });
   });
 }

@@ -101,7 +101,7 @@ function Login() {
           </form>
         </Box>
         <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-          <ChooseLanguage />
+          <ChooseLanguage variant="select" />
         </Box>
       </Container>
     </>
