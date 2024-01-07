@@ -19,6 +19,8 @@ import PropTypes from 'prop-types';
 function Loading({ open }) {
   return (
     <Backdrop
+      role="alert"
+      aria-busy="true"
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={open}
     >

@@ -27,9 +27,9 @@ function AppMenu() {
 
   if (
     !user
-    || location.pathname.startsWith('/enroll')
-    || location.pathname.startsWith('/reset-password')
-    || location.pathname.startsWith('/login')
+    || location?.pathname.startsWith('/enroll')
+    || location?.pathname.startsWith('/reset-password')
+    || location?.pathname.startsWith('/login')
   ) return null;
 
   return (

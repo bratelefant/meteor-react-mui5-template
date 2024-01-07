@@ -119,7 +119,5 @@ if (Meteor.isClient) {
       fireEvent.change(input, { target: { value: 'new password' } });
       expect(input.value).to.equal('new password');
     });
-
-  // Weitere Tests hier hinzufügen...
   });
 }

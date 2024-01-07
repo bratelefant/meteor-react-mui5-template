@@ -9,6 +9,7 @@ import { IconButton, Menu, MenuItem } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useCurrentUser } from './UserProvider';
 
 /**
  * @function AccountMenu
@@ -20,6 +21,7 @@ function AccountMenu() {
   const location = useLocation();
   const { t } = useTranslation(['AppMenu']);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const user = useCurrentUser();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,11 +31,13 @@ function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const { pathname } = location;
-
   useEffect(() => {
     handleClose();
-  }, [pathname]);
+  }, [location?.pathname]);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div>

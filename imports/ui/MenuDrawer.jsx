@@ -34,8 +34,6 @@ export default function MenuDrawer() {
   const { t } = useTranslation('MenuDrawer');
   const { location } = useLocation();
 
-  const { pathname } = location;
-
   const toggleDrawer = (pOpen) => (event) => {
     if (
       event.type === 'keydown'
@@ -49,7 +47,7 @@ export default function MenuDrawer() {
 
   useEffect(() => {
     setOpen(false);
-  }, [pathname]);
+  }, [location?.pathname]);
 
   return (
     <div>

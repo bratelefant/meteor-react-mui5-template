@@ -25,7 +25,7 @@ function Home() {
   }, [user?._id]);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} id="home">
       <Container>
         <Welcome />
       </Container>
