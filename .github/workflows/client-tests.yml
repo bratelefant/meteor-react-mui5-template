@@ -1,4 +1,4 @@
-name: Server Tests
+name: UI Tests
 
 on:
   push:
@@ -88,4 +88,4 @@ jobs:
         run: meteor npm ci
 
       - name: Run Tests
-        run: meteor npm run test:server
+        run: meteor npm run test:client

@@ -4,7 +4,6 @@ import {
 import { Navigate, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import sinon from 'sinon';
-import userEvent from '@testing-library/user-event';
 import { I18nextProvider } from 'react-i18next';
 import chai, { expect } from 'chai';
 import chaiDom from 'chai-dom';
@@ -104,7 +103,10 @@ if (Meteor.isClient) {
         </Router>,
       );
       const select = screen.getByRole('combobox');
-      await userEvent.click(select);
+      fireEvent(
+        select,
+        new MouseEvent('click', { bubbles: true, cancelable: true }),
+      );
 
       await waitFor(() => screen.getByText('en'));
 
