@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
@@ -19,6 +19,7 @@ if (Meteor.isClient) {
     });
 
     afterEach(() => {
+      cleanup();
       sinon.restore();
     });
 

@@ -1,7 +1,10 @@
-import { render, fireEvent } from '@testing-library/react';
+import {
+  render, fireEvent, screen, waitFor, cleanup,
+} from '@testing-library/react';
 import { Navigate, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import sinon from 'sinon';
+import userEvent from '@testing-library/user-event';
 import { I18nextProvider } from 'react-i18next';
 import chai, { expect } from 'chai';
 import chaiDom from 'chai-dom';
@@ -23,6 +26,7 @@ if (Meteor.isClient) {
     });
 
     afterEach(() => {
+      cleanup();
       sinon.restore();
     });
 
@@ -87,6 +91,24 @@ if (Meteor.isClient) {
       fireEvent.click(getByRole('button'), new MouseEvent('click', { bubbles: true, cancelable: true }));
       expect(getByText(i18n.t('en', { ns: 'ChooseLanguage' }))).to.be.visible;
       expect(getByText(i18n.t('de', { ns: 'ChooseLanguage' }))).to.be.visible;
+    });
+
+    it('will render a language menu if variant is select and if select input is clicked', async () => {
+      render(
+        <Router>
+          <UserProvider>
+            <I18nextProvider i18n={i18n}>
+              <ChooseLanguage variant="select" />
+            </I18nextProvider>
+          </UserProvider>
+        </Router>,
+      );
+      const select = screen.getByRole('combobox');
+      await userEvent.click(select);
+
+      await waitFor(() => screen.getByText('en'));
+
+      expect(screen.getAllByRole('option')).to.have.lengthOf(2);
     });
   });
 }

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
@@ -17,6 +17,7 @@ if (Meteor.isClient) {
     });
 
     afterEach(() => {
+      cleanup();
       sinon.restore();
     });
 

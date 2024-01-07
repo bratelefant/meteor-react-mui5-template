@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import { Navigate, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import { expect } from 'chai';
@@ -20,6 +20,7 @@ if (Meteor.isClient) {
     });
 
     afterEach(() => {
+      cleanup();
       sinon.restore();
     });
 
