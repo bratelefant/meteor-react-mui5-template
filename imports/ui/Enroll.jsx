@@ -4,7 +4,7 @@
  * @locus Client
  * @module imports/ui/Enroll
  */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
@@ -67,6 +67,12 @@ function Enroll() {
 
   const steps = [t('choose password'), t('confirm password'), t('done')];
 
+  useEffect(() => {
+    if (!token) {
+      navigate('/');
+    }
+  }, [token]);
+
   return (
     <Container maxWidth="sm">
       <Box
@@ -113,7 +119,7 @@ function Enroll() {
                           autoComplete="new-password"
                           error={!!error}
                           helperText={error}
-                          aria-errormessage="Passwörter stimmen nicht überein"
+                          aria-invalid={!!error}
                           sx={{ m: 1 }}
                           label={t('confirm password')}
                           type="password"

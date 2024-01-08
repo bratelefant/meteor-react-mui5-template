@@ -18,6 +18,10 @@ Generated API docs are available at [bratelefant.github.io/meteor-react-mui5-tem
 - Mui 5.15
 - React-i18n (use of i18n on server and client)
 
+## Install the app
+
+    meteor npm install
+
 ## Run the app
 
     meteor npm start

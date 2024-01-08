@@ -114,5 +114,19 @@ if (Meteor.isClient) {
 
       expect(screen.getAllByRole('option')).to.have.lengthOf(2);
     });
+
+    it('will return null, if there is only one language', () => {
+      sinon.stub(Meteor.settings.public, 'languages').value(['en']);
+      const { container } = render(
+        <Router>
+          <UserProvider>
+            <I18nextProvider i18n={i18n}>
+              <ChooseLanguage variant="iconbutton" />
+            </I18nextProvider>
+          </UserProvider>
+        </Router>,
+      );
+      expect(container.querySelectorAll('.MuiIconButton-root')).to.have.lengthOf(0);
+    });
   });
 }

@@ -55,6 +55,10 @@ function ChooseLanguage({ variant = 'select' }) {
     changeLanguage(e.target.value);
   };
 
+  if (!Meteor.settings?.public?.languages || Meteor.settings.public.languages.length === 1) {
+    return null;
+  }
+
   if (variant === 'iconbutton') {
     return (
       <div>
