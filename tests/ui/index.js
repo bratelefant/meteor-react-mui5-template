@@ -5,3 +5,6 @@ import './app.tests';
 import './appmenu.tests';
 import './chooselanguage.tests';
 import './enroll.tests';
+import './forgotpassword.tests';
+import './home.tests';
+import './loading.tests';

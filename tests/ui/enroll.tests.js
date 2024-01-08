@@ -1,6 +1,7 @@
 import {
   cleanup,
   render,
+  waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import chai, { expect } from 'chai';
@@ -27,7 +28,7 @@ if (Meteor.isClient) {
       sinon.stub(Meteor, 'userAsync');
       sinon.stub(Accounts, 'logout');
       Meteor.user.returns({ _id: '123' });
-      Meteor.userAsync.resolves({ _id: '123' }); // now Meteor.user() will return the user we just created
+      Meteor.userAsync.resolves({ _id: '123' });
       await i18n.changeLanguage('en');
       await i18n.loadNamespaces('Enroll');
     });
@@ -124,6 +125,30 @@ if (Meteor.isClient) {
       expect(confirmPasswordInput).to.have.attribute('type', 'password');
       expect(confirmPasswordInput).to.have.attribute('aria-invalid', 'false');
       expect(getAllByText((i18n.t('confirm password', { ns: 'Enroll' })))).to.have.lengthOf(3);
+    });
+
+    it('shows an error if the users re-entered password does not match the first', async () => {
+      const { container } = render(
+        <Router>
+          <UserProvider>
+            <I18nextProvider i18n={i18n}>
+              <Enroll />
+            </I18nextProvider>
+          </UserProvider>
+        </Router>,
+      );
+
+      const passwordInput = container.getElementsByClassName('MuiInputBase-input')[0];
+      const button = container.getElementsByClassName('MuiButtonBase-root')[0];
+      await userEvent.type(passwordInput, 'password');
+      await userEvent.click(button);
+      const confirmPasswordInput = container.getElementsByClassName('MuiInputBase-input')[1];
+      await userEvent.type(confirmPasswordInput, 'not the same password');
+      const continueButton = container.getElementsByClassName('MuiButtonBase-root')[1];
+      await userEvent.click(continueButton);
+      waitFor(() => {
+        expect(confirmPasswordInput).to.have.attribute('aria-invalid', 'true');
+      });
     });
   });
 }

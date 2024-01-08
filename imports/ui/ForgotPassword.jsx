@@ -72,6 +72,7 @@ function ForgotPassword() {
                           error={!!error}
                           helperText={error}
                           variant="outlined"
+                          placeholder={t('email')}
                           value={email}
                           onChange={handleEmailChange}
                         />

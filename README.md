@@ -33,3 +33,10 @@ Generated API docs are available at [bratelefant.github.io/meteor-react-mui5-tem
 ## Linting
 
     meteor npm lint
+
+## What's planned
+
+ - Define a sample collection with CRUD ops, simple-schema-2 and Mui X Data Grid.
+ - Get Mobile apps ready
+ - Integrate Upload / Download of assets, including S3
+ - Get Push Notifications running
