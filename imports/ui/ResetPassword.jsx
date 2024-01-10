@@ -97,6 +97,7 @@ function ResetPassword() {
                           label={t('password')}
                           autoComplete="new-password"
                           type="password"
+                          name="password"
                           value={password}
                           onChange={handlePasswordChange}
                         />
@@ -117,6 +118,7 @@ function ResetPassword() {
                           sx={{ m: 1 }}
                           label={t('confirm password')}
                           type="password"
+                          name="confirmPassword"
                           value={confirmPassword}
                           onChange={handleConfirmPasswordChange}
                         />

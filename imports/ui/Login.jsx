@@ -25,14 +25,14 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState({});
   const onSubmit = (e) => {
     e.preventDefault();
     Meteor.loginWithPassword({ email }, password, (err) => {
       if (err) {
-        setError(err.reason);
+        setError({ password: t(err.reason, { ns: 'Login' }) });
       } else {
-        setError(undefined);
+        setError({});
         navigate('/');
       }
     });
@@ -56,9 +56,12 @@ function Login() {
               <TextField
                 label={t('email')}
                 error={!!error}
+                name="email"
                 autoComplete="username"
                 variant="outlined"
                 margin="normal"
+                helperText={error?.email}
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -66,11 +69,13 @@ function Login() {
                 label={t('password')}
                 autoComplete="current-password"
                 error={!!error}
+                name="password"
                 variant="outlined"
+                required
                 margin="normal"
                 type="password"
                 value={password}
-                helperText={error}
+                helperText={error?.password}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
@@ -80,7 +85,7 @@ function Login() {
                 color="primary"
                 size="large"
               >
-                {t('Login:signin')}
+                {t('signin', { ns: 'Login' })}
               </Button>
               <Button
                 variant="contained"
@@ -88,14 +93,14 @@ function Login() {
                 size="large"
                 onClick={() => navigate('/sign-up')}
               >
-                {t('Login:signup')}
+                {t('signup', { ns: 'Login' })}
               </Button>
               <Button
                 variant="text"
                 size="small"
                 onClick={() => navigate('/forgotten-password')}
               >
-                {t('Login:forgottenPassword')}
+                {t('forgottenPassword', { ns: 'Login' })}
               </Button>
             </Stack>
           </form>

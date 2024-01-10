@@ -7,4 +7,7 @@ import './chooselanguage.tests';
 import './enroll.tests';
 import './forgotpassword.tests';
 import './home.tests';
-import './loading.tests';
+import './login.tests';
+import './menudrawer.tests';
+import './resetpassword.tests';
+import './signup.tests';

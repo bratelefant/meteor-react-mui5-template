@@ -77,6 +77,7 @@ function SignUp() {
                               : error
                           }
                           variant="outlined"
+                          name="email"
                           value={email}
                           onChange={handleEmailChange}
                         />
