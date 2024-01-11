@@ -29,6 +29,7 @@
     "react-i18next": "^14.0.0",
     "react-router-dom": "^6.21.1",
     "react-test-renderer": "^18.2.0",
+    "simpl-schema": "^3.4.1",
     "sinon": "^17.0.1"
   },
   "meteor": {

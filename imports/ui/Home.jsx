@@ -27,7 +27,9 @@ function Home() {
   return (
     <Box sx={{ flexGrow: 1 }} id="home">
       <Container>
-        <Welcome />
+        <Box sx={{ my: 2 }}>
+          <Welcome />
+        </Box>
       </Container>
     </Box>
   );
