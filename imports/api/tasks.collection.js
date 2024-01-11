@@ -14,55 +14,20 @@ const TasksDefinition = {
       label: 'Title',
       max: 200,
     },
-    description: {
-      type: String,
-      label: 'Description',
-      optional: true,
-    },
-    createdAt: {
-      type: Date,
-      label: 'Created At',
-      defaultValue: new Date(),
-      autoValue() {
-        if (this.isInsert) {
-          return new Date();
-        }
-        return this.unset();
-      },
-      optional: true,
-    },
-    updatedAt: {
-      type: Date,
-      label: 'Updated At',
-      defaultValue: new Date(),
-      autoValue() {
-        if (this.isUpdate || this.isInsert) {
-          return new Date();
-        }
-        return this.unset();
-      },
-      optional: true,
-    },
-    completedAt: {
-      type: Date,
-      label: 'Completed At',
-      optional: true,
-    },
     completed: {
       type: Boolean,
       label: 'Completed',
       optional: true,
     },
-    userId: {
-      type: String,
-      label: 'User ID',
-      autoValue() {
-        if (this.isInsert) {
-          return Meteor.userId();
-        }
-        return this.unset();
-      },
+    createdAt: {
+      type: Date,
+      label: 'Created At',
       optional: true,
+      autoValue: () => {
+        if (this.isInsert) {
+          return new Date();
+        }
+      },
     },
   }),
 };
