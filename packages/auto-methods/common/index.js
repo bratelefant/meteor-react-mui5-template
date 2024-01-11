@@ -35,7 +35,7 @@ class AutoCollection {
       }
       return {
         field: key,
-        headerName: key.charAt(0).toUpperCase() + key.slice(1),
+        headerName: schema.getDefinition(key).label,
         type: columnType,
       };
     });
