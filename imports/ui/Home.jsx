@@ -5,10 +5,10 @@
  * @module imports/ui/Home
  */
 import React, { useEffect } from 'react';
-import { Container, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Welcome from './Welcome';
 import { useCurrentUser } from './UserProvider';
+import Tasks from './Tasks';
 
 /**
  * @function Home
@@ -26,11 +26,7 @@ function Home() {
 
   return (
     <Box sx={{ flexGrow: 1 }} id="home">
-      <Container>
-        <Box sx={{ my: 2 }}>
-          <Welcome />
-        </Box>
-      </Container>
+      <Tasks />
     </Box>
   );
 }

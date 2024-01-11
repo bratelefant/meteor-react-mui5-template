@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
+    "@mui/x-data-grid": "^6.18.7",
     "@testing-library/user-event": "^14.5.2",
     "i18next": "^23.7.16",
     "i18next-browser-languagedetector": "^7.2.0",
@@ -30,7 +31,10 @@
     "react-router-dom": "^6.21.1",
     "react-test-renderer": "^18.2.0",
     "simpl-schema": "^3.4.1",
-    "sinon": "^17.0.1"
+    "sinon": "^17.0.1",
+    "uniforms": "^4.0.0-alpha.5",
+    "uniforms-bridge-simple-schema-2": "^4.0.0-alpha.5",
+    "uniforms-mui": "^4.0.0-alpha.5"
   },
   "meteor": {
     "mainModule": {
