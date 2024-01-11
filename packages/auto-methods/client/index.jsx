@@ -18,18 +18,23 @@ checkNpmVersions({
   '@mui/x-data-grid': '^6.18.7',
 });
 
-function EditToolbar({ bridge }) {
+function EditToolbar({ bridge, autoCollection }) {
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(true);
   };
 
+  const onSubmit = async (model) => {
+    await Meteor.callAsync(`${autoCollection.collectionName}.insert`, model);
+    setOpen(false);
+  };
+
   return (
     <GridToolbarContainer>
-      <Dialog open={open}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Insert</DialogTitle>
         <Box margin={4}>
-          <AutoForm schema={bridge} />
+          <AutoForm schema={bridge} onSubmit={onSubmit} />
         </Box>
       </Dialog>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>Add Record</Button>
@@ -45,7 +50,7 @@ export function Datatable({ autoCollection }) {
     <Box>
       <DataGrid
         slots={{ toolbar: EditToolbar }}
-        slotProps={{ toolbar: { bridge: autoCollection.bridge } }}
+        slotProps={{ toolbar: { bridge: autoCollection.bridge, autoCollection } }}
         rows={data}
         columns={autoCollection.columns()}
         loading={loading()}

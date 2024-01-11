@@ -22,22 +22,26 @@ const TasksDefinition = {
     createdAt: {
       type: Date,
       label: 'Created At',
+      defaultValue: new Date(),
       autoValue() {
         if (this.isInsert) {
           return new Date();
         }
         return this.unset();
       },
+      optional: true,
     },
     updatedAt: {
       type: Date,
       label: 'Updated At',
+      defaultValue: new Date(),
       autoValue() {
         if (this.isUpdate || this.isInsert) {
           return new Date();
         }
         return this.unset();
       },
+      optional: true,
     },
     completedAt: {
       type: Date,
@@ -58,6 +62,7 @@ const TasksDefinition = {
         }
         return this.unset();
       },
+      optional: true,
     },
   }),
 };
