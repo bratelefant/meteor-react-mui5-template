@@ -41,6 +41,17 @@ class AutoCollection {
       return {
         field: key,
         headerName: schema.getDefinition(key).label,
+        /* preProcessEditCellProps: (params) => {
+          const modifier = { $set: { [params.field]: params.props.value } };
+          let valid;
+          try {
+            this.collection.simpleSchema().validate(modifier, { modifier: true });
+            valid = true;
+          } catch (e) {
+            valid = false;
+          }
+          return { ...params.props, error: !valid };
+        }, */
         type: columnType,
         editable: true,
       };
