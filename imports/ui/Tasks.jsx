@@ -5,7 +5,7 @@
  * @module imports/ui/Home
  */
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { Datatable } from 'meteor/bratelefant:auto-methods/client';
 import TasksAutoCollection from '../api/tasks.collection';
 /**
@@ -15,9 +15,11 @@ import TasksAutoCollection from '../api/tasks.collection';
  */
 function Tasks() {
   return (
-    <Box sx={{ flexGrow: 1 }} id="home">
-      <Datatable autoCollection={TasksAutoCollection} />
-    </Box>
+    <Container maxWidth="lg">
+      <Box sx={{ flexGrow: 1 }} padding={2}>
+        <Datatable autoCollection={TasksAutoCollection} />
+      </Box>
+    </Container>
   );
 }
 

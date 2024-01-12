@@ -52,6 +52,14 @@ export function Datatable({ autoCollection }) {
         slots={{ toolbar: EditToolbar }}
         slotProps={{ toolbar: { bridge: autoCollection.bridge, autoCollection } }}
         rows={data}
+        editMode="row"
+        processRowUpdate={(updateRow, { _id }) => {
+          console.log('updateRow', updateRow);
+          console.log('originalRow', _id);
+          console.log(autoCollection.columns());
+          Meteor.callAsync(`${autoCollection.collectionName}.update`, _id, { $set: updateRow });
+        }}
+        onProcessRowUpdateError={(error) => console.log(error)}
         columns={autoCollection.columns()}
         loading={loading()}
         getRowId={(row) => row._id}

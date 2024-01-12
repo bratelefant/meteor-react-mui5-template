@@ -23,14 +23,20 @@ class AutoCollectionController {
   registerMethods() {
     for (let i = 0; i < this.methods.length; i += 1) {
       Meteor.methods({
-        [`${this.autoCollection.collectionName}.${this.methods[i].name}`]: async (args) => {
+        [`${this.autoCollection.collectionName}.${this.methods[i].name}`]: async (...args) => {
+          /**
+           * Check if the user is authorized to perform the operation
+           */
           if (this.autoCollection.policyChecks && typeof this.autoCollection.policyChecks[this.methods[i].name] === 'function') {
             const check = await this.autoCollection.policyChecks[this.methods[i].name](args);
             if (!check) {
               throw new Meteor.Error('not-authorized');
             }
           }
-          const result = await this.methods[i].operation.call(this, args);
+          /**
+           * Perform the operation
+           */
+          const result = await this.methods[i].operation.call(undefined, ...args);
           return result;
         },
       });

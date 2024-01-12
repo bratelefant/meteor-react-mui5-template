@@ -18,25 +18,31 @@ class AutoCollection {
     const schema = this.collection.simpleSchema();
     const schemaKeys = schema.objectKeys();
     const columns = schemaKeys.map((key) => {
-      const type = schema.getDefinition(key).type.name;
+      const def = schema.getDefinition(key);
       let columnType;
+      const type = schema.getDefinition(key).type[0]?.type;
+
       switch (type) {
-        case 'String':
-          columnType = 'text';
+        case Boolean:
+          columnType = 'boolean';
           break;
-        case 'Number':
-          columnType = 'numeric';
-          break;
-        case 'Date':
+        case Date:
           columnType = 'date';
           break;
+        case String:
+          columnType = 'string';
+          break;
+        case Number:
+          columnType = 'numeric';
+          break;
         default:
-          columnType = 'text';
+          columnType = 'string';
       }
       return {
         field: key,
         headerName: schema.getDefinition(key).label,
         type: columnType,
+        editable: true,
       };
     });
     return columns;
