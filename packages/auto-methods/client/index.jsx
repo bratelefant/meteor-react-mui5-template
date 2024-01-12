@@ -4,7 +4,7 @@
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 import React from 'react';
 import {
-  Box, Button, Dialog, DialogTitle, Typography,
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography,
 } from '@mui/material';
 import { useFind, useSubscribe } from 'meteor/react-meteor-data';
 import { DataGrid, GridActionsCellItem, GridToolbarContainer } from '@mui/x-data-grid';
@@ -44,15 +44,37 @@ function EditToolbar({ bridge, autoCollection }) {
 }
 
 export function Datatable({ autoCollection }) {
+  const [deleteOpen, setDeleteOpen] = React.useState(undefined);
   const loading = useSubscribe(`${autoCollection.collectionName}.all`);
   const data = useFind(() => autoCollection.collection.find({}, { limit: 100 }), []);
 
-  const handleDeleteClick = (id) => () => {
-    Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
+  const handleDeleteClick = async (id) => {
+    await Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
+    setDeleteOpen(undefined);
   };
 
+  function confirmDelete() {
+    return (
+      <Dialog
+        maxWidth="xs"
+        open={!!deleteOpen}
+      >
+        <DialogTitle>Are you sure?</DialogTitle>
+        <DialogContent dividers>
+          You will not be able to recover this record!
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteOpen(false)}>
+            No
+          </Button>
+          <Button onClick={async () => handleDeleteClick(deleteOpen)}>Yes</Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
   return (
     <Box>
+      {confirmDelete()}
       <DataGrid
         disableRowSelectionOnClick
         slots={{ toolbar: EditToolbar }}
@@ -74,7 +96,7 @@ export function Datatable({ autoCollection }) {
             <GridActionsCellItem
               icon={<DeleteIcon />}
               label="Delete"
-              onClick={handleDeleteClick(id)}
+              onClick={() => setDeleteOpen(id)}
               color="inherit"
             />,
           ],
