@@ -7,10 +7,11 @@ import {
   Box, Button, Dialog, DialogTitle, Typography,
 } from '@mui/material';
 import { useFind, useSubscribe } from 'meteor/react-meteor-data';
-import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, GridToolbarContainer } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 import AddIcon from '@mui/icons-material/Add';
 import { AutoForm } from 'uniforms-mui';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 
 checkNpmVersions({
   '@mui/icons-material': '^5.15.2',
@@ -46,6 +47,10 @@ export function Datatable({ autoCollection }) {
   const loading = useSubscribe(`${autoCollection.collectionName}.all`);
   const data = useFind(() => autoCollection.collection.find({}, { limit: 100 }), []);
 
+  const handleDeleteClick = (id) => () => {
+    Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
+  };
+
   return (
     <Box>
       <DataGrid
@@ -59,7 +64,21 @@ export function Datatable({ autoCollection }) {
           return updateRow;
         }}
         onProcessRowUpdateError={(error) => console.log(error)}
-        columns={autoCollection.columns()}
+        columns={[...autoCollection.columns(), {
+          field: 'actions',
+          type: 'actions',
+          headerName: 'Actions',
+          width: 100,
+          cellClassName: 'actions',
+          getActions: ({ id }) => [
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              onClick={handleDeleteClick(id)}
+              color="inherit"
+            />,
+          ],
+        }]}
         loading={loading()}
         getRowId={(row) => row._id}
       />
