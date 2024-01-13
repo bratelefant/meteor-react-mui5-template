@@ -14,6 +14,18 @@ const TasksDefinition = {
     update: async () => Meteor.userId(),
     remove: async () => Meteor.userId(),
   },
+  locales: {
+    de: {
+      'Due Date': 'Fälligkeitsdatum',
+      Completed: 'Erledigt',
+      Title: 'Titel',
+    },
+    en: {
+      'Due Date': 'Due Date',
+      Completed: 'Completed',
+      Title: 'Title',
+    },
+  },
   schema: new SimpleSchema({
     title: {
       type: String,

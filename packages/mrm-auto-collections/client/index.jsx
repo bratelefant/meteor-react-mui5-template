@@ -36,7 +36,11 @@ checkNpmVersions({
 });
 
 function EditToolbar({ bridge, autoCollection }) {
-  const { t } = useTranslation('bratelefant_mrm-auto-collections');
+  const { t, i18n } = useTranslation('bratelefant_mrm-auto-collections');
+  Object.entries(autoCollection.locales).forEach(([key, value]) => {
+    i18n.addResourceBundle(key, 'bratelefant_mrm-auto-collections', value);
+  });
+
   const [open, setOpen] = React.useState(false);
   const ref = useRef();
   const [keepOpen, setKeepOpen] = React.useState(false);
@@ -86,7 +90,10 @@ function EditToolbar({ bridge, autoCollection }) {
 
 EditToolbar.propTypes = {
   bridge: PropTypes.shape({}).isRequired,
-  autoCollection: PropTypes.shape({ collectionName: PropTypes.string.isRequired }).isRequired,
+  autoCollection: PropTypes.shape({
+    collectionName: PropTypes.string.isRequired,
+    locales: PropTypes.shape({}),
+  }).isRequired,
 };
 
 export function Datatable({ autoCollection, cursorKey = 'default' }) {
@@ -195,6 +202,7 @@ Datatable.propTypes = {
     collection: PropTypes.shape({
       find: PropTypes.func,
     }).isRequired,
+    locales: PropTypes.shape({}),
     cursors: PropTypes.shape({
       default: PropTypes.shape({
         sel: PropTypes.func,
@@ -221,5 +229,6 @@ export function CollectionName({ autoCollection }) {
 CollectionName.propTypes = {
   autoCollection: PropTypes.shape({
     collectionName: PropTypes.string.isRequired,
+    locales: PropTypes.shape({}),
   }).isRequired,
 };

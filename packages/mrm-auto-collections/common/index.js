@@ -1,6 +1,7 @@
 /**
  * @locus Server and Client
  */
+import i18next from 'i18next';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
@@ -27,6 +28,13 @@ class AutoCollection {
         .extend(collectionDef.schema)
         .extend(collectionDef.metaSchema),
     );
+
+    /**
+     * This will be used to display the data.
+     * You can add keys and value schemas like this:
+     * column.label: 'My Label',
+     */
+    this.locales = collectionDef.locales;
     /**
      * will be checked before any insert, update or remove
      */
@@ -59,7 +67,7 @@ class AutoCollection {
       }
       return {
         field: key,
-        headerName: schema.getDefinition(key).label,
+        headerName: i18next.t(schema.getDefinition(key).label, { ns: 'bratelefant_mrm-auto-collections' }),
         /* preProcessEditCellProps: (params) => {
           const modifier = { $set: { [params.field]: params.props.value } };
           let valid;
