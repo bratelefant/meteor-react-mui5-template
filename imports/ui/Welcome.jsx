@@ -17,12 +17,12 @@ import { useTranslation } from 'react-i18next';
  * @returns {React.Element} A Stack component from Material UI containing a Typography component.
  */
 function Welcome() {
-  const { t } = useTranslation(['Welcome']);
+  const { t } = useTranslation(['bratelefant_mrm-locales']);
 
   return (
     <Stack spacing={1} alignItems="center">
       <Typography variant="h2" color="text.secondary">
-        {t('headline', { appName: Meteor.settings.public.name })}
+        {t('Welcome.headline', { appName: Meteor.settings.public.name })}
       </Typography>
     </Stack>
   );

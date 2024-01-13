@@ -34,7 +34,7 @@ function ResetPassword() {
   const [error, setError] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState('');
   const { token } = useParams();
-  const { t } = useTranslation(['ResetPassword']);
+  const { t } = useTranslation(['bratelefant_mrm-locales']);
   const navigate = useNavigate();
 
   const handlePasswordChange = (event) => {
@@ -49,13 +49,13 @@ function ResetPassword() {
     e.preventDefault();
     if (password !== confirmPassword) {
       setActiveStep(1);
-      setError(t('passwords do not match'));
+      setError(t('ResetPassword.passwordsDoNotMatch'));
     } else {
       Accounts.resetPassword(token, password, (err) => {
         if (err) {
           setError(
             err.reason?.includes('Token expired')
-              ? t('token expired')
+              ? t('ResetPassword.error.tokenExpired')
               : err.reason,
           );
         } else {
@@ -66,7 +66,7 @@ function ResetPassword() {
     }
   };
 
-  const steps = [t('choose password'), t('confirm password'), t('done')];
+  const steps = [t('ResetPassword.step.choosePassword'), t('ResetPassword.step.confirmPassword'), t('ResetPassword.step.done')];
 
   return (
     <Container maxWidth="sm">
@@ -94,7 +94,7 @@ function ResetPassword() {
                         <TextField
                           autoFocus
                           sx={{ m: 1 }}
-                          label={t('password')}
+                          label={t('ResetPassword.password')}
                           autoComplete="new-password"
                           type="password"
                           name="password"
@@ -102,7 +102,7 @@ function ResetPassword() {
                           onChange={handlePasswordChange}
                         />
                         <Button variant="contained" type="submit">
-                          {t('continue')}
+                          {t('ResetPassword.continue')}
                         </Button>
                       </Stack>
                     </form>
@@ -116,7 +116,7 @@ function ResetPassword() {
                           error={!!error}
                           helperText={error}
                           sx={{ m: 1 }}
-                          label={t('confirm password')}
+                          label={t('ResetPassword.confirmPassword')}
                           type="password"
                           name="confirmPassword"
                           value={confirmPassword}
@@ -128,14 +128,14 @@ function ResetPassword() {
                           color="primary"
                           type="submit"
                         >
-                          {t('continue')}
+                          {t('ResetPassword.continue')}
                         </Button>
                         <Button
                           disabled={index !== 1}
                           onClick={() => setActiveStep(0)}
                           sx={{ mt: 1, mr: 1 }}
                         >
-                          {t('back')}
+                          {t('ResetPassword.back')}
                         </Button>
                       </Stack>
                     </form>
@@ -144,13 +144,13 @@ function ResetPassword() {
                   {index === 2 && (
                     <Stack spacing={1}>
                       <Typography variant="h4" color="textSecondary">
-                        {t('success')}
+                        {t('ResetPassword.success')}
                       </Typography>
                       <Typography variant="body1">
-                        {t('password successfully changed')}
+                        {t('ResetPassword.successMessage')}
                       </Typography>
                       <Button variant="contained" onClick={() => navigate('/')}>
-                        {t('back to home')}
+                        {t('ResetPassword.backToHome')}
                       </Button>
                     </Stack>
                   )}

@@ -1,9 +1,8 @@
 Package.describe({
-  name: 'bratelefant:auto-methods',
+  name: 'bratelefant:mrm-locales',
   version: '0.0.1',
   // Brief, one-line summary of the package.
-  summary:
-    'Automatically create Meteor methods for your collections, based on SimpleSchema definitions.',
+  summary: 'Locales for Meteor React Mui',
   // URL to the Git repository containing the source code for this package.
   git: '',
   // By default, Meteor will default to using README.md for documentation.
@@ -14,17 +13,14 @@ Package.describe({
 Package.onUse((api) => {
   api.versionsFrom('2.14');
   api.use('ecmascript');
-  api.use('aldeed:collection2');
-  api.use('tmeasday:check-npm-versions');
-  api.use('react-meteor-data');
-  api.mainModule('common/index.js', ['server', 'client']);
   api.addAssets('locales/de/translation.json', 'client');
   api.addAssets('locales/en/translation.json', 'client');
+  api.mainModule('mrm-locales.js');
 });
 
 Package.onTest((api) => {
   api.use('ecmascript');
   api.use('tinytest');
-  api.use('bratelefant:auto-methods');
-  api.mainModule('tests/index.js');
+  api.use('bratelefant:mrm-locales');
+  api.mainModule('mrm-locales-tests.js');
 });

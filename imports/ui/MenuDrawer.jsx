@@ -31,7 +31,7 @@ import { useTranslation } from 'react-i18next';
 export default function MenuDrawer() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const { t } = useTranslation('MenuDrawer');
+  const { t } = useTranslation('bratelefant_mrm-locales');
   const { location } = useLocation();
 
   const toggleDrawer = (pOpen) => (event) => {
@@ -81,7 +81,7 @@ export default function MenuDrawer() {
                 <ListItemIcon>
                   <Home />
                 </ListItemIcon>
-                <ListItemText primary={t('home')} />
+                <ListItemText primary={t('MenuDrawer.home')} />
               </ListItemButton>
             </ListItem>
           </List>

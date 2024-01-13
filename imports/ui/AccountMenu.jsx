@@ -19,7 +19,7 @@ import { useCurrentUser } from './UserProvider';
 function AccountMenu() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation(['AppMenu']);
+  const { t } = useTranslation(['bratelefant_mrm-locales']);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useCurrentUser();
 
@@ -73,7 +73,7 @@ function AccountMenu() {
             handleClose();
           }}
         >
-          {t('account')}
+          {t('AccountMenu.account')}
         </MenuItem>
         <MenuItem
           onClick={async () => {
@@ -82,7 +82,7 @@ function AccountMenu() {
             handleClose();
           }}
         >
-          {t('logout')}
+          {t('AccountMenu.logout')}
         </MenuItem>
       </Menu>
     </div>

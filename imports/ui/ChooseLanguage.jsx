@@ -38,7 +38,7 @@ function ChooseLanguage({ variant = 'select' }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { t } = useTranslation(['translation', 'ChooseLanguage']);
+  const { t } = useTranslation(['bratelefant_mrm-locales']);
 
   const changeLanguage = async (value) => {
     if (user) {
@@ -96,7 +96,7 @@ function ChooseLanguage({ variant = 'select' }) {
                 handleClose();
               }}
             >
-              {t(lang, { ns: 'ChooseLanguage' })}
+              {t(`ChooseLanguage.${lang}`)}
             </MenuItem>
           ))}
         </Menu>
@@ -107,7 +107,7 @@ function ChooseLanguage({ variant = 'select' }) {
   return (
     <FormControl>
       <InputLabel id="sel-lang">
-        {t('language', { ns: 'ChooseLanguage' })}
+        {t('ChooseLanguage.language')}
       </InputLabel>
       <Select
         size="small"
@@ -121,7 +121,7 @@ function ChooseLanguage({ variant = 'select' }) {
         labelId="sel-lang"
         onChange={onChange}
         value={i18n.language}
-        label={t('language', { ns: 'ChooseLanguage' })}
+        label={t('ChooseLanguage.language')}
       >
         {Meteor.settings.public.languages.map((lang) => (
           <MenuItem key={lang} value={lang}>

@@ -31,9 +31,9 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
-  const { t, i18n } = useTranslation(['SignUp']);
+  const { t, i18n } = useTranslation(['bratelefant_mrm-locales']);
 
-  const steps = [t('Enter Email'), t('Check your inbox')];
+  const steps = [t('SignUp.step.enterEmail'), t('SignUp.step.checkYourInbox')];
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -68,12 +68,12 @@ function SignUp() {
                     <form onSubmit={onSubmit}>
                       <Stack spacing={1}>
                         <TextField
-                          label={t('email')}
+                          label={t('SignUp.email')}
                           autoFocus
                           error={!!error}
                           helperText={
                             error?.includes('Email already exists')
-                              ? t('Email already registered')
+                              ? t('SignUp.emailAlreadyRegistered')
                               : error
                           }
                           variant="outlined"
@@ -82,7 +82,7 @@ function SignUp() {
                           onChange={handleEmailChange}
                         />
                         <Button variant="contained" type="submit">
-                          {t('Create account')}
+                          {t('SignUp.createAccount')}
                         </Button>
                       </Stack>
                     </form>
@@ -90,10 +90,10 @@ function SignUp() {
                   {index === 1 && (
                     <Stack spacing={1}>
                       <Typography variant="h4" color="textSecondary">
-                        {t("You've got mail!")}
+                        {t('SignUp.youHaveMail')}
                       </Typography>
                       <Typography variant="body1">
-                        {t('Please check your inbox for further instructions')}
+                        {t('SignUp.followInstructions')}
                       </Typography>
                     </Stack>
                   )}

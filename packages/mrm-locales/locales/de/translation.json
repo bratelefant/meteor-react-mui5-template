@@ -1,0 +1,106 @@
+{
+  "email": "Email-Adresse",
+  "password": "Passwort",
+  "not logged in": "Du musst angemeldet sein, um diese Seite zu sehen.",
+  "Account": {
+    "title": "Benutzer",
+    "current password": "Aktuelles Passwort",
+    "new password": "Neues Passwort",
+    "confirm new password": "Neues Passwort bestätigen",
+    "password successfully changed": "Das Passwort wurde erfolgreich geändert.",
+    "submit": "Speichern",
+    "reset": "Nochmal",
+    "error": {
+      "passwordsDoNotMatch": "Die Passwörter stimmen nicht überein.",
+      "passwordMayNotBeEmpty": "Das Passwort darf nicht leer sein.",
+      "incorrectPassword": "Das alte Passwort ist falsch."
+    }
+  },
+  "AccountMenu": {
+    "account": "Benutzer",
+    "logout": "Abmelden",
+    "home": "Start"
+  },
+  "AppMenu": {
+    "account": "Benutzer",
+    "logout": "Abmelden",
+    "home": "Start"
+  },
+  "ChooseLanguage": {
+    "language": "Sprache",
+    "de": "Deutsch",
+    "en": "Englisch"
+  },
+  "Enroll": {
+    "continue": "Weiter",
+    "back": "Zurück",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "registrationSuccessful": "Anmeldung erfolgreich",
+    "loginWithNewPassword": "Sie können sich nun mit Ihrem neuen Passwort anmelden.",
+    "start": "Los gehts",
+    "step": {
+      "choosePassword": "Passwort wählen",
+      "confirmPassword": "Passwort bestätigen",
+      "done": "Fertig"
+    },
+    "error": {
+      "passwordsDoNotMatch": "Die Passwörter stimmen nicht überein.",
+      "passwordMayNotBeEmpty": "Das Passwort darf nicht leer sein.",
+      "tokenExpired": "Der verwendete Link ist abgelaufen"
+    }
+  },
+  "ForgotPassword": {
+    "step": {
+      "enterYourEmail": "Tragen Sie die E-Mail-Adresse ein, mit der Sie sich registriert haben.",
+      "checkYourInbox": "Prüfen Sie Ihr Postfach"
+    },
+    "checkYourInbox": "Sie haben Post!",
+    "email": "Email",
+    "resetPassword": "Passwort zurücksetzen",
+    "followInstructions": "Bitte überprüfen Sie Ihre E-Mails und folgen Sie dem Link, um Ihr Passwort zurückzusetzen."
+  },
+  "Login": {
+    "signin": "Anmelden",
+    "signup": "Registrieren",
+    "forgottenPassword": "Passwort vergessen?",
+    "User has no password set": "Falsches Passwort",
+    "Incorrect password": "Falsches Passwort",
+    "User not found": "Benutzer nicht gefunden"
+  },
+  "MenuDrawer": {
+    "home": "Startseite"
+  },
+  "ResetPassword": {
+    "step": {
+      "choosePassword": "Neues Passwort wählen",
+      "confirmPassword": "Passwort bestätigen",
+      "done": "Fertig"
+    },
+    "confirmPassword": "Neues Passwort bestätigen",
+    "password": "Passwort",
+    "continue": "Weiter",
+    "back": "Zurück",
+    "success": "Passwort erfolgreich geändert",
+    "successMessage": "Dein Passwort wurde erfolgreich geändert.",
+    "backToHome": "Zurück zur Startseite",
+    "error": {
+      "tokenExpired": "Der Link ist nicht mehr gültig. Bitte fordere einen neuen Link an.",
+      "passwordsDoNotMatch": "Die Passwörter stimmen nicht überein."
+    }
+  },
+  "SignUp": {
+    "step": {
+      "enterEmail": "Email eingeben",
+      "checkYourInbox": "Postfach prüfen"
+    },
+    "createAccount": "Account anlegen",
+    "youHaveMail": "Sie haben Post!",
+    "emailAlreadyRegistered": "Email bereits registriert",
+    "email": "Email",
+    "followInstructions": "Bitte prüfen Sie Ihr Postfach und rufen Sie den enthaltenen Link auf."
+  },
+  "Welcome": {
+    "headline": "Willkommen zu {{appName}}!"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "email": "Email",
+  "password": "Password",
+  "not logged in": "You must be logged in to view this page",
+  "Account": {
+    "title": "Account",
+    "current password": "Current password",
+    "new password": "New password",
+    "confirm new password": "Confirm new password",
+    "password successfully changed": "Password successfully changed",
+    "submit": "Submit",
+    "reset": "Reset",
+    "error": {
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "passwordMayNotBeEmpty": "This field may not be empty.",
+      "incorrectPassword": "The current password is wrong."
+    }
+  },
+  "AppMenu": {
+    "account": "Profile",
+    "logout": "Log out",
+    "home": "Home"
+  },
+  "AccountMenu": {
+    "account": "User",
+    "logout": "Log out",
+    "home": "Home"
+  },
+  "ChooseLanguage": {
+    "language": "Language",
+    "de": "German",
+    "en": "English"
+  },
+  "Enroll": {
+    "continue": "Continue",
+    "back": "back",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "registrationSuccessful": "Registration successful",
+    "loginWithNewPassword": "Sie können sich nun mit Ihrem neuen Passwort anmelden.",
+    "start": "Let's go",
+    "step": {
+      "choosePassword": "Choose password",
+      "confirmPassword": "Confirm password",
+      "done": "Done"
+    },
+    "error": {
+      "passwordsDoNotMatch": "The passwords do not match.",
+      "passwordMayNotBeEmpty": "The password may not be empty.",
+      "tokenExpired": "The Link you provided has expired"
+    }
+  },
+  "ForgotPassword": {
+    "step": {
+      "enterYourEmail": "Enter your email that you used to register.",
+      "checkYourInbox": "Check your inbox"
+    },
+    "checkYourInbox": "You have got mail!",
+    "email": "Email",
+    "resetPassword": "Reset Password",
+    "followInstructions": "Check the email we sent you and follow the link to reset your password."
+  },
+  "Login": {
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "forgottenPassword": "Forgot Password",
+    "User has no password set": "Incorrect password",
+    "Incorrect password": "Incorrect password",
+    "User not found": "User not found"
+  },
+  "MenuDrawer": {
+    "home": "Home"
+  },
+  "ResetPassword": {
+    "steps": {
+      "choosePassword": "Choose new password",
+      "confirmPassword": "Confirm password",
+      "done": "Ready"
+    },
+    "confirmPassword": "Confirm your new password",
+    "password": "Password",
+    "continue": "continue",
+    "back": "back",
+    "success": "Password updated",
+    "successMessage": "Your password was successfully updated.",
+    "backToHome": "Home",
+    "error": {
+      "tokenExpired": "The link you provided has expired.",
+      "passwordsDoNotMatch": "The passwords do not match."
+    }
+  },
+  "SignUp": {
+    "step": {
+      "enterEmail": "Enter your Email",
+      "checkYourInbox": "Check your inbox"
+    },
+    "error": {
+      "emailAlreadyRegistered": "Email already registered"
+    },
+    "createAccount": "Create account",
+    "youHaveMail": "You've got mail!",
+    "email": "Email",
+    "followInstructions": "Please check your inbox and follow the link."
+  },
+  "Welcome": {
+    "headline": "Welcome to {{appName}}!"
+  }
+}

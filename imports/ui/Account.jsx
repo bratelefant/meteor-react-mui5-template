@@ -33,22 +33,27 @@ function Account() {
   const [paswordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState({});
   const [success, setSuccess] = useState();
-  const { t } = useTranslation(['Account']);
+  const { t } = useTranslation(['bratelefant_mrm-locales']);
   const user = useCurrentUser();
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (password.trim() === '') {
-      setError({ password: 'Passwort darf nicht leer sein.' });
+      setError({ password: t('Account.error.passwordMayNotBeEmpty') });
       return;
     }
     if (password !== paswordConfirm) {
-      setError({ passwordConfirm: 'Passwörter stimmen nicht überein.' });
+      setError({ passwordConfirm: t('Account.error.passwordsDoNotMatch') });
       return;
     }
     Accounts.changePassword(oldPassword, password, (err) => {
       if (err) {
-        setError({ oldPassword: err.reason });
+        if (err.reason === 'Incorrect password') {
+          setError({ oldPassword: t('Account.error.incorrectPassword') });
+        } else {
+          setError({ oldPassword: err.reason });
+        }
+
         setSuccess(false);
       } else {
         setError({});
@@ -63,12 +68,12 @@ function Account() {
     <Container maxWidth="sm">
       <form onSubmit={onSubmit} role="form">
         <Card>
-          <CardHeader title={t('title')} />
+          <CardHeader title={t('Account.title')} />
           <CardContent>
             {success ? (
               <Box>
                 <Alert severity="success">
-                  {t('password successfully changed')}
+                  {t('Account.password successfully changed')}
                 </Alert>
               </Box>
             ) : (
@@ -81,7 +86,7 @@ function Account() {
                 <TextField
                   id="oldPassword"
                   autoComplete="current-password"
-                  label={t('current password')}
+                  label={t('Account.current password')}
                   name="oldPassword"
                   variant="outlined"
                   margin="normal"
@@ -97,7 +102,7 @@ function Account() {
                   name="newPassword"
                   error={!!error.password}
                   helperText={error.password}
-                  label={t('new password')}
+                  label={t('Account.new password')}
                   variant="outlined"
                   margin="normal"
                   type="password"
@@ -110,7 +115,7 @@ function Account() {
                   name="newPasswordConfirm"
                   error={!!error.passwordConfirm}
                   helperText={error.passwordConfirm}
-                  label={t('confirm new password')}
+                  label={t('Account.confirm new password')}
                   variant="outlined"
                   margin="normal"
                   type="password"
@@ -128,7 +133,7 @@ function Account() {
                 color="primary"
                 size="large"
               >
-                {t('submit')}
+                {t('Account.submit')}
               </Button>
             )}
             {success && (
@@ -141,7 +146,7 @@ function Account() {
                   setSuccess(false);
                 }}
               >
-                {t('Account:reset')}
+                {t('Account.reset')}
               </Button>
             )}
           </CardActions>

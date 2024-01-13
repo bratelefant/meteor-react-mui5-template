@@ -34,7 +34,7 @@ function Enroll() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { token } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation(['Enroll']);
+  const { t } = useTranslation(['bratelefant_mrm-locales']);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -48,13 +48,13 @@ function Enroll() {
     e.preventDefault();
     if (password !== confirmPassword) {
       setActiveStep(1);
-      setError(t('Passwords do not match'));
+      setError(t('Enroll.error.passwordsDoNotMatch'));
     } else {
       Accounts.resetPassword(token, password, (err) => {
         if (err) {
           setError(
             err.reason?.includes('Token expired')
-              ? t('Token expired')
+              ? t('Enroll.error.tokenExpired')
               : err.reason,
           );
         } else {
@@ -65,7 +65,7 @@ function Enroll() {
     }
   };
 
-  const steps = [t('choose password'), t('confirm password'), t('done')];
+  const steps = [t('Enroll.step.choosePassword'), t('Enroll.step.confirmPassword'), t('Enroll.step.done')];
 
   useEffect(() => {
     if (!token) {
@@ -99,14 +99,14 @@ function Enroll() {
                         <TextField
                           autoFocus
                           sx={{ m: 1 }}
-                          label={t('password', { ns: 'Enroll' })}
+                          label={t('Enroll.password')}
                           type="password"
                           autoComplete="new-password"
                           value={password}
                           onChange={handlePasswordChange}
                         />
                         <Button variant="contained" type="submit">
-                          {t('continue')}
+                          {t('Enroll.continue')}
                         </Button>
                       </Stack>
                     </form>
@@ -121,7 +121,7 @@ function Enroll() {
                           helperText={error}
                           aria-invalid={!!error}
                           sx={{ m: 1 }}
-                          label={t('confirm password')}
+                          label={t('Enroll.confirmPassword')}
                           type="password"
                           value={confirmPassword}
                           onChange={handleConfirmPasswordChange}
@@ -132,14 +132,14 @@ function Enroll() {
                           color="primary"
                           type="submit"
                         >
-                          {t('continue')}
+                          {t('Enroll.continue')}
                         </Button>
                         <Button
                           disabled={index !== 1}
                           onClick={() => setActiveStep(0)}
                           sx={{ mt: 1, mr: 1 }}
                         >
-                          {t('back')}
+                          {t('Enroll.back')}
                         </Button>
                       </Stack>
                     </form>
@@ -147,13 +147,13 @@ function Enroll() {
                   {index === 2 && (
                     <Stack spacing={1}>
                       <Typography variant="h4" color="textSecondary">
-                        {t('Registration successful')}
+                        {t('Enroll.registrationSuccessful')}
                       </Typography>
                       <Typography variant="body1">
-                        {t('You can now log in with your new password.')}
+                        {t('Enroll.loginWithNewPassword')}
                       </Typography>
                       <Button variant="contained" onClick={() => navigate('/')}>
-                        {t('start')}
+                        {t('Enroll.start')}
                       </Button>
                     </Stack>
                   )}

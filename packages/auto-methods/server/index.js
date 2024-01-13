@@ -11,7 +11,11 @@ class AutoCollectionController {
       },
       {
         name: 'update',
-        operation: async (sel, mod, opt) => this.autoCollection.collection.updateAsync(sel, mod, opt),
+        operation: async (sel, mod, opt) => this.autoCollection.collection.updateAsync(
+          sel,
+          mod,
+          opt,
+        ),
       },
       {
         name: 'remove',

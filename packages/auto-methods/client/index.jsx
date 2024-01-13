@@ -27,7 +27,7 @@ import PropTypes from 'prop-types';
 import AddIcon from '@mui/icons-material/Add';
 import { AutoForm } from 'uniforms-mui';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SimpleSchema from 'simpl-schema';
+import { useTranslation } from 'react-i18next';
 
 checkNpmVersions({
   '@mui/icons-material': '^5.15.2',
@@ -36,6 +36,7 @@ checkNpmVersions({
 });
 
 function EditToolbar({ bridge, autoCollection }) {
+  const { t } = useTranslation('bratelefant_auto-methods');
   const [open, setOpen] = React.useState(false);
   const ref = useRef();
   const [keepOpen, setKeepOpen] = React.useState(false);
@@ -76,7 +77,7 @@ function EditToolbar({ bridge, autoCollection }) {
         startIcon={<AddIcon />}
         onClick={handleClick}
       >
-        Add Record
+        {t('autoCollection.addRecord')}
       </Button>
       <GridToolbar />
     </GridToolbarContainer>
@@ -84,10 +85,8 @@ function EditToolbar({ bridge, autoCollection }) {
 }
 
 EditToolbar.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  bridge: PropTypes.object.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  autoCollection: PropTypes.object.isRequired,
+  bridge: PropTypes.shape({}).isRequired,
+  autoCollection: PropTypes.shape({ collectionName: PropTypes.string.isRequired }).isRequired,
 };
 
 export function Datatable({ autoCollection, cursorKey = 'default' }) {
@@ -205,8 +204,8 @@ Datatable.propTypes = {
     columns: PropTypes.func.isRequired,
     bridge: PropTypes.shape({
     }).isRequired,
-    schema: SimpleSchema.isRequired,
-    metaSchema: SimpleSchema,
+    schema: PropTypes.shape({}).isRequired,
+    metaSchema: PropTypes.shape({}).isRequired,
   }).isRequired,
   cursorKey: PropTypes.string,
 };

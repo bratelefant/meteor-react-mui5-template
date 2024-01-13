@@ -21,7 +21,7 @@ import Loading from './Loading';
  * @returns {ReactNode} - The component displayed.
  */
 function Login() {
-  const { t } = useTranslation(['translation', 'Login']);
+  const { t } = useTranslation(['bratelefant_mrm-locales']);
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -30,7 +30,7 @@ function Login() {
     e.preventDefault();
     Meteor.loginWithPassword({ email }, password, (err) => {
       if (err) {
-        setError({ password: t(err.reason, { ns: 'Login' }) });
+        setError({ password: t(`Login.${err.reason}`) });
       } else {
         setError({});
         navigate('/');
@@ -85,7 +85,7 @@ function Login() {
                 color="primary"
                 size="large"
               >
-                {t('signin', { ns: 'Login' })}
+                {t('Login.signin')}
               </Button>
               <Button
                 variant="contained"
@@ -93,14 +93,14 @@ function Login() {
                 size="large"
                 onClick={() => navigate('/sign-up')}
               >
-                {t('signup', { ns: 'Login' })}
+                {t('Login.signup')}
               </Button>
               <Button
                 variant="text"
                 size="small"
                 onClick={() => navigate('/forgotten-password')}
               >
-                {t('forgottenPassword', { ns: 'Login' })}
+                {t('Login.forgottenPassword')}
               </Button>
             </Stack>
           </form>

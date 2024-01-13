@@ -4,7 +4,7 @@
  * @locus Client
  * @module imports/ui/Home
  */
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentUser } from './UserProvider';

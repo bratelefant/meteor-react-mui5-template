@@ -11,12 +11,12 @@ if (Meteor.isClient) {
     .use(Backend)
     .init({
       debug: Meteor.isDevelopment,
-      fallbackLng: Meteor.settings.public.defaultLanguage,
+      fallbackLng: Meteor.settings?.public?.defaultLanguage || 'en',
       interpolation: {
         escapeValue: false,
       },
       backend: {
-        loadPath: '/packages/{{ns}}/locales/{{lng}}/translation.json',
+        loadPath: '/locales/{{lng}}/{{ns}}.json',
       },
     });
 }
@@ -25,7 +25,7 @@ if (Meteor.isServer) {
   i18n.use(ServerBackend).init({
     debug: Meteor.isDevelopment,
     preload: Meteor.settings.public.languages,
-    fallbackLng: Meteor.settings.public.defaultLanguage,
+    fallbackLng: Meteor.settings?.public?.defaultLanguage || 'en',
     saveMissing: Meteor.isDevelopment,
     backend: {
       loadPath: (lngs, namespace) => Assets.absoluteFilePath(`locales/${lngs}/${namespace}.json`),
