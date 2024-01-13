@@ -101,7 +101,7 @@ export function Datatable({ autoCollection }) {
               icon={<DeleteIcon />}
               label="Delete"
               onClick={() => setDeleteOpen(id)}
-              color="inherit"
+              color="secondary"
             />,
           ],
         }]}

@@ -21,8 +21,8 @@ function Home() {
   const user = useCurrentUser();
 
   useLayoutEffect(() => {
-    if (!user?._id) navigate('/login');
-  }, [user?._id]);
+    if (!Meteor.loggingIn() && !user?._id) navigate('/login');
+  }, [Meteor.loggingIn(), user?._id]);
 
   return (
     <Box sx={{ flexGrow: 1 }} id="home">
