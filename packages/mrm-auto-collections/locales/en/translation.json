@@ -1,5 +1,18 @@
 {
-  "autoCollection": {
-    "addRecord": "Add Record"
+  "InsertModal": {
+    "title": "Add Record",
+    "submit": "Add",
+    "cancel": "Cancel",
+    "keepOpen": "Keep open"
+  },
+  "DeleteModal": {
+    "title": "Are you sure you want to delete this record?",
+    "message": "You will not be able to recover this record!",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "Datatable": {
+    "addRecord": "Add Record",
+    "actions": "Actions"
   }
 }

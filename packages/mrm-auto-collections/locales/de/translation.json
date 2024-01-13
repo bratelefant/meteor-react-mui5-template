@@ -1,5 +1,18 @@
 {
-  "autoCollection": {
-    "addRecord": "Neuer Eintrag"
+  "InsertModal": {
+    "title": "Einfügen",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "keepOpen": "Geöffnet lassen"
+  },
+  "DeleteModal": {
+    "title": "Eintrag wirklich löschen?",
+    "message": "Dies kann nicht rückgängig gemacht werden.",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "Datatable": {
+    "addRecord": "Neuer Eintrag",
+    "actions": "Aktionen"
   }
 }

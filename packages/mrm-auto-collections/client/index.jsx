@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /**
  * @locus Client
  */
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import {
   Alert,
   Box,
@@ -25,15 +26,46 @@ import {
 } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 import AddIcon from '@mui/icons-material/Add';
-import { AutoForm } from 'uniforms-mui';
+import {
+  AutoForm,
+  AutoFields,
+  AutoField,
+  ErrorsField,
+  SubmitField,
+} from 'uniforms-mui';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import { useTranslation } from 'react-i18next';
+import { useForm } from 'uniforms';
 
 checkNpmVersions({
   '@mui/icons-material': '^5.15.2',
   '@mui/material': '^5.15.2',
   '@mui/x-data-grid': '^6.18.7',
 });
+
+function CustomAutoField({ label, ...props }) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+
+  // Übersetzen Sie das Label basierend auf dem Namen des Feldes
+  const newLabel = t(`column.${label}`);
+
+  return <AutoField {...props} label={newLabel} />;
+}
+
+function CustomAutoFields() {
+  const { schema } = useForm();
+  return (
+    <div>
+      {schema.getSubfields().map((fieldName) => (
+        <CustomAutoField
+          key={fieldName}
+          name={fieldName}
+          {...schema.getField(fieldName)}
+        />
+      ))}
+    </div>
+  );
+}
 
 function EditToolbar({ bridge, autoCollection }) {
   const { t, i18n } = useTranslation(['bratelefant_mrm-auto-collections']);
@@ -65,25 +97,36 @@ function EditToolbar({ bridge, autoCollection }) {
 
   return (
     <GridToolbarContainer sx={{ alignItems: 'flex-end' }}>
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Insert</DialogTitle>
-        <DialogContent>
-          <AutoForm ref={ref} schema={bridge} onSubmit={onSubmit} />
-        </DialogContent>
-        <DialogActions>
-          <FormControlLabel
-            control={<Switch checked={keepOpen} onChange={toggleKeepOpen} />}
-            label="Keep dialog open"
-          />
-        </DialogActions>
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="xs">
+        <AutoForm ref={ref} schema={bridge} onSubmit={onSubmit}>
+          <DialogTitle>{t('InsertModal.title')}</DialogTitle>
+          <DialogContent dividers>
+
+            <AutoFields />
+            <ErrorsField />
+
+          </DialogContent>
+          <DialogActions>
+            <FormControlLabel
+              sx={{ flexGrow: 1 }}
+              control={<Switch checked={keepOpen} onChange={toggleKeepOpen} />}
+              label={t('InsertModal.keepOpen')}
+            />
+            <Button onClick={() => setOpen(false)}>
+              {t('InsertModal.cancel')}
+            </Button>
+            <SubmitField label={t('InsertModal.submit')} />
+          </DialogActions>
+        </AutoForm>
       </Dialog>
+
       <Button
         color="primary"
         size="small"
         startIcon={<AddIcon />}
         onClick={handleClick}
       >
-        {t('autoCollection.addRecord')}
+        {t('Datatable.addRecord')}
       </Button>
       <GridToolbar />
     </GridToolbarContainer>
@@ -101,6 +144,7 @@ EditToolbar.propTypes = {
 export function Datatable({ autoCollection, cursorKey = 'default' }) {
   const cursorDef = autoCollection.cursors[cursorKey];
   const [deleteOpen, setDeleteOpen] = React.useState(undefined);
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
   const [error, setError] = React.useState(undefined);
   const loading = useSubscribe(`${autoCollection.collectionName}.${cursorKey}`);
   const data = useFind(
@@ -108,30 +152,35 @@ export function Datatable({ autoCollection, cursorKey = 'default' }) {
     [],
   );
 
-  const handleDeleteClick = async (id) => {
-    await Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
-    setDeleteOpen(undefined);
-  };
+  const handleDeleteClick = useCallback(
+    async (id) => {
+      await Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
+      setDeleteOpen(undefined);
+    },
+    [autoCollection.collectionName],
+  );
 
-  function confirmDelete() {
-    return (
+  const confirmDelete = useCallback(
+    () => (
       <Dialog maxWidth="xs" open={!!deleteOpen}>
-        <DialogTitle>Are you sure?</DialogTitle>
-        <DialogContent dividers>
-          You will not be able to recover this record!
-        </DialogContent>
+        <DialogTitle>{t('DeleteModal.title')}</DialogTitle>
+        <DialogContent dividers>{t('DeleteModal.message')}</DialogContent>
         <DialogActions>
-          <Button onClick={() => setDeleteOpen(false)}>No</Button>
+          <Button onClick={() => setDeleteOpen(false)}>
+            {t('DeleteModal.no')}
+          </Button>
           <Button
             type="submit"
             onClick={async () => handleDeleteClick(deleteOpen)}
           >
-            Yes
+            {t('DeleteModal.yes')}
           </Button>
         </DialogActions>
       </Dialog>
-    );
-  }
+    ),
+    [deleteOpen, handleDeleteClick, t],
+  );
+
   return (
     <Box>
       {confirmDelete()}
@@ -159,7 +208,7 @@ export function Datatable({ autoCollection, cursorKey = 'default' }) {
           {
             field: 'actions',
             type: 'actions',
-            headerName: 'Actions',
+            headerName: t('Datatable.actions'),
             width: 100,
             cellClassName: 'actions',
             getActions: ({ id }) => [
@@ -212,8 +261,7 @@ Datatable.propTypes = {
       }),
     }).isRequired,
     columns: PropTypes.func.isRequired,
-    bridge: PropTypes.shape({
-    }).isRequired,
+    bridge: PropTypes.shape({}).isRequired,
     schema: PropTypes.shape({}).isRequired,
     metaSchema: PropTypes.shape({}).isRequired,
   }).isRequired,
