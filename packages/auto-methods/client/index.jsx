@@ -8,11 +8,14 @@ import {
   Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Snackbar, Typography,
 } from '@mui/material';
 import { useFind, useSubscribe } from 'meteor/react-meteor-data';
-import { DataGrid, GridActionsCellItem, GridToolbarContainer } from '@mui/x-data-grid';
+import {
+  DataGrid, GridActionsCellItem, GridToolbar, GridToolbarContainer,
+} from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 import AddIcon from '@mui/icons-material/Add';
 import { AutoForm } from 'uniforms-mui';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SimpleSchema from 'simpl-schema';
 
 checkNpmVersions({
   '@mui/icons-material': '^5.15.2',
@@ -32,17 +35,23 @@ function EditToolbar({ bridge, autoCollection }) {
   };
 
   return (
-    <GridToolbarContainer>
+    <GridToolbarContainer sx={{ alignItems: 'flex-end' }}>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Insert</DialogTitle>
         <Box margin={4}>
           <AutoForm schema={bridge} onSubmit={onSubmit} />
         </Box>
       </Dialog>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>Add Record</Button>
+      <Button color="primary" size="small" startIcon={<AddIcon />} onClick={handleClick}>Add Record</Button>
+      <GridToolbar />
     </GridToolbarContainer>
   );
 }
+
+EditToolbar.propTypes = {
+  bridge: PropTypes.object.isRequired,
+  autoCollection: PropTypes.object.isRequired,
+};
 
 export function Datatable({ autoCollection }) {
   const [deleteOpen, setDeleteOpen] = React.useState(undefined);
@@ -69,7 +78,7 @@ export function Datatable({ autoCollection }) {
           <Button onClick={() => setDeleteOpen(false)}>
             No
           </Button>
-          <Button onClick={async () => handleDeleteClick(deleteOpen)}>Yes</Button>
+          <Button type="submit" onClick={async () => handleDeleteClick(deleteOpen)}>Yes</Button>
         </DialogActions>
       </Dialog>
     );
@@ -123,7 +132,12 @@ export function Datatable({ autoCollection }) {
 }
 
 Datatable.propTypes = {
-  autoCollection: PropTypes.object.isRequired,
+  autoCollection: PropTypes.shape({
+    collectionName: PropTypes.string.isRequired,
+    policyChecks: PropTypes.object.isRequired,
+    schema: SimpleSchema.isRequired,
+    metaSchema: SimpleSchema,
+  }).isRequired,
 };
 
 export function CollectionName({ autoCollection }) {
@@ -135,5 +149,7 @@ export function CollectionName({ autoCollection }) {
 }
 
 CollectionName.propTypes = {
-  autoCollection: PropTypes.object.isRequired,
+  autoCollection: PropTypes.shape({
+    collectionName: PropTypes.string.isRequired,
+  }).isRequired,
 };

@@ -19,10 +19,47 @@ const TasksDefinition = {
       label: 'Completed',
       optional: true,
     },
-    createdAt: {
+  }),
+  metaSchema: new SimpleSchema({
+    _createdAt: {
       type: Date,
       label: 'Created At',
-      defaultValue: new Date(),
+      autoValue() {
+        if (this.isInsert) {
+          return new Date();
+        }
+        return this.value;
+      },
+    },
+    _createdBy: {
+      type: String,
+      label: 'Created By',
+      autoValue() {
+        if (this.isInsert) {
+          return Meteor.userId();
+        }
+        return this.value;
+      },
+    },
+    _updatedAt: {
+      type: Date,
+      label: 'Updated At',
+      autoValue() {
+        if (this.isUpdate || this.isInsert) {
+          return new Date();
+        }
+        return undefined;
+      },
+    },
+    _updatedBy: {
+      type: String,
+      label: 'Updated By',
+      autoValue() {
+        if (this.isUpdate || this.isInsert) {
+          return Meteor.userId();
+        }
+        return undefined;
+      },
     },
   }),
 };
