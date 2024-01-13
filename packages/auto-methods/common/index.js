@@ -9,6 +9,7 @@ class AutoCollection {
   constructor(collectionDef) {
     this.collectionName = collectionDef.collectionName;
     this.collection = new Mongo.Collection(this.collectionName);
+    this.cursors = collectionDef.cursors;
     /**
      * This will be used to display and edit the data
      */

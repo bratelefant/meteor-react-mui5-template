@@ -3,6 +3,12 @@ import AutoCollection from 'meteor/bratelefant:auto-methods/common';
 
 const TasksDefinition = {
   collectionName: 'tasks',
+  cursors: {
+    default: {
+      sel: () => ({ _createdBy: Meteor.userId() }),
+      opt: () => ({ sort: { _createdAt: -1 } }),
+    },
+  },
   policyChecks: {
     insert: async () => Meteor.userId(),
     update: async () => Meteor.userId(),

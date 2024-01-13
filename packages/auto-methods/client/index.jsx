@@ -53,11 +53,12 @@ EditToolbar.propTypes = {
   autoCollection: PropTypes.object.isRequired,
 };
 
-export function Datatable({ autoCollection }) {
+export function Datatable({ autoCollection, cursorKey = 'default' }) {
+  const cursorDef = autoCollection.cursors[cursorKey];
   const [deleteOpen, setDeleteOpen] = React.useState(undefined);
   const [error, setError] = React.useState(undefined);
-  const loading = useSubscribe(`${autoCollection.collectionName}.all`);
-  const data = useFind(() => autoCollection.collection.find({}, { limit: 100 }), []);
+  const loading = useSubscribe(`${autoCollection.collectionName}.${cursorKey}`);
+  const data = useFind(() => autoCollection.collection.find(cursorDef.sel(), cursorDef.opt()), []);
 
   const handleDeleteClick = async (id) => {
     await Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);

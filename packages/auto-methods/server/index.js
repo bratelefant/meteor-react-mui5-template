@@ -23,28 +23,46 @@ class AutoCollectionController {
   registerMethods() {
     for (let i = 0; i < this.methods.length; i += 1) {
       Meteor.methods({
-        [`${this.autoCollection.collectionName}.${this.methods[i].name}`]: async (...args) => {
-          /**
-           * Check if the user is authorized to perform the operation
-           */
-          if (this.autoCollection.policyChecks && typeof this.autoCollection.policyChecks[this.methods[i].name] === 'function') {
-            const check = await this.autoCollection.policyChecks[this.methods[i].name](args);
-            if (!check) {
-              throw new Meteor.Error('not-authorized');
+        [`${this.autoCollection.collectionName}.${this.methods[i].name}`]:
+          async (...args) => {
+            /**
+             * Check if the user is authorized to perform the operation
+             */
+            if (
+              this.autoCollection.policyChecks
+              && typeof this.autoCollection.policyChecks[this.methods[i].name]
+                === 'function'
+            ) {
+              const check = await this.autoCollection.policyChecks[
+                this.methods[i].name
+              ](args);
+              if (!check) {
+                throw new Meteor.Error('not-authorized');
+              }
             }
-          }
-          /**
-           * Perform the operation
-           */
-          const result = await this.methods[i].operation.call(undefined, ...args);
-          return result;
-        },
+            /**
+             * Perform the operation
+             */
+            const result = await this.methods[i].operation.call(
+              undefined,
+              ...args,
+            );
+            return result;
+          },
       });
     }
   }
 
   registerPublications() {
-    Meteor.publish(`${this.autoCollection.collectionName}.all`, () => this.autoCollection.collection.find({}, { limit: 1000 }));
+    Object.entries(this.autoCollection.cursors).forEach(([name, props]) => {
+      Meteor.publish(
+        `${this.autoCollection.collectionName}.${name}`,
+        () => this.autoCollection.collection.find(
+          props.sel(),
+          props.opt(),
+        ),
+      );
+    });
   }
 }
 
