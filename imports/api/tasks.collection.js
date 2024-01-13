@@ -1,5 +1,5 @@
 import SimpleSchema from 'simpl-schema';
-import AutoCollection from 'meteor/bratelefant:auto-methods/common';
+import AutoCollection from 'meteor/bratelefant:mrm-auto-collections/common';
 
 const TasksDefinition = {
   collectionName: 'tasks',

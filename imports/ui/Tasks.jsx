@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Box, Container } from '@mui/material';
-import { Datatable } from 'meteor/bratelefant:auto-methods/client';
+import { Datatable } from 'meteor/bratelefant:mrm-auto-collections/client';
 import TasksAutoCollection from '../api/tasks.collection';
 import i18n from '../common/i18n';
 /**

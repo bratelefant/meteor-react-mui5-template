@@ -22,5 +22,5 @@ react-meteor-data       # React higher-order component for reactively tracking M
 accounts-password
 email
 meteortesting:mocha
-bratelefant:auto-methods
 bratelefant:mrm-locales
+bratelefant:mrm-auto-collections

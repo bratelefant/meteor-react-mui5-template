@@ -9,7 +9,7 @@ base64@1.0.12
 binary-heap@1.0.11
 blaze-tools@1.1.4
 boilerplate-generator@1.7.2
-bratelefant:auto-methods@0.0.1
+bratelefant:mrm-auto-collections@0.0.1
 bratelefant:mrm-locales@0.0.1
 caching-compiler@1.2.2
 caching-html-compiler@1.2.2

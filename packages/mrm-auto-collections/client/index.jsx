@@ -36,7 +36,7 @@ checkNpmVersions({
 });
 
 function EditToolbar({ bridge, autoCollection }) {
-  const { t } = useTranslation('bratelefant_auto-methods');
+  const { t } = useTranslation('bratelefant_mrm-auto-collections');
   const [open, setOpen] = React.useState(false);
   const ref = useRef();
   const [keepOpen, setKeepOpen] = React.useState(false);
