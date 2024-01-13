@@ -20,6 +20,22 @@ const TasksDefinition = {
       label: 'Title',
       max: 200,
     },
+    dueDate: {
+      type: Date,
+      label: 'Due Date',
+      optional: true,
+      defaultValue: (() => {
+        const date = new Date();
+        date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+        return date;
+      })(),
+      custom() {
+        if (this.value && this.value < new Date() && this.isInsert) {
+          return 'dueDateMustBeInTheFuture';
+        }
+        return undefined;
+      },
+    },
     completed: {
       type: Boolean,
       label: 'Completed',
