@@ -33,7 +33,7 @@ function Account() {
   const [paswordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState({});
   const [success, setSuccess] = useState();
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
   const user = useCurrentUser();
 
   const onSubmit = (e) => {

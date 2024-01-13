@@ -31,7 +31,7 @@ import { useTranslation } from 'react-i18next';
 export default function MenuDrawer() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const { t } = useTranslation('bratelefant_mrm-locales');
+  const { t } = useTranslation();
   const { location } = useLocation();
 
   const toggleDrawer = (pOpen) => (event) => {

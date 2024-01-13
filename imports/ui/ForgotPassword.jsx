@@ -28,7 +28,7 @@ function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
 
   const steps = [t('ForgotPassword.step.enterYourEmail'), t('ForgotPassword.step.checkYourInbox')];
 

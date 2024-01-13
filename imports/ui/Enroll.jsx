@@ -34,7 +34,7 @@ function Enroll() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { token } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);

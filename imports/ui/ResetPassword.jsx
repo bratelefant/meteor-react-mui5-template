@@ -34,7 +34,7 @@ function ResetPassword() {
   const [error, setError] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState('');
   const { token } = useParams();
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handlePasswordChange = (event) => {

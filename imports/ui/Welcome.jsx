@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
  * @returns {React.Element} A Stack component from Material UI containing a Typography component.
  */
 function Welcome() {
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
 
   return (
     <Stack spacing={1} alignItems="center">

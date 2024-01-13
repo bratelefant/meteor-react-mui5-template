@@ -67,7 +67,11 @@ class AutoCollection {
       }
       return {
         field: key,
-        headerName: i18next.t(schema.getDefinition(key).label, { ns: 'bratelefant_mrm-auto-collections' }),
+        headerName: this.locales
+          ? i18next.t(`column.${schema.getDefinition(key).label}`, {
+            ns: 'bratelefant_mrm-auto-collections',
+          })
+          : schema.getDefinition(key).label,
         /* preProcessEditCellProps: (params) => {
           const modifier = { $set: { [params.field]: params.props.value } };
           let valid;

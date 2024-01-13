@@ -31,7 +31,7 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
-  const { t, i18n } = useTranslation(['bratelefant_mrm-locales']);
+  const { t, i18n } = useTranslation();
 
   const steps = [t('SignUp.step.enterEmail'), t('SignUp.step.checkYourInbox')];
 

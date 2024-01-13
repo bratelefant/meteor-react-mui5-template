@@ -38,7 +38,7 @@ function ChooseLanguage({ variant = 'select' }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
 
   const changeLanguage = async (value) => {
     if (user) {

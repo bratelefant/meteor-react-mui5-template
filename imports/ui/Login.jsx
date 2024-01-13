@@ -21,7 +21,7 @@ import Loading from './Loading';
  * @returns {ReactNode} - The component displayed.
  */
 function Login() {
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

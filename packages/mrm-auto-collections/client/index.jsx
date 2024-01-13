@@ -36,10 +36,12 @@ checkNpmVersions({
 });
 
 function EditToolbar({ bridge, autoCollection }) {
-  const { t, i18n } = useTranslation('bratelefant_mrm-auto-collections');
-  Object.entries(autoCollection.locales).forEach(([key, value]) => {
-    i18n.addResourceBundle(key, 'bratelefant_mrm-auto-collections', value);
-  });
+  const { t, i18n } = useTranslation(['bratelefant_mrm-auto-collections']);
+  if (autoCollection.locales) {
+    Object.entries(autoCollection.locales).forEach(([key, value]) => {
+      i18n.addResourceBundle(key, 'bratelefant_mrm-auto-collections', value);
+    });
+  }
 
   const [open, setOpen] = React.useState(false);
   const ref = useRef();
