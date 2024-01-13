@@ -84,7 +84,9 @@ function EditToolbar({ bridge, autoCollection }) {
 }
 
 EditToolbar.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   bridge: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   autoCollection: PropTypes.object.isRequired,
 };
 
@@ -186,10 +188,31 @@ export function Datatable({ autoCollection, cursorKey = 'default' }) {
 Datatable.propTypes = {
   autoCollection: PropTypes.shape({
     collectionName: PropTypes.string.isRequired,
-    policyChecks: PropTypes.object.isRequired,
+    policyChecks: PropTypes.shape({
+      insert: PropTypes.func,
+      update: PropTypes.func,
+      remove: PropTypes.func,
+    }).isRequired,
+    collection: PropTypes.shape({
+      find: PropTypes.func,
+    }).isRequired,
+    cursors: PropTypes.shape({
+      default: PropTypes.shape({
+        sel: PropTypes.func,
+        opt: PropTypes.func,
+      }),
+    }).isRequired,
+    columns: PropTypes.func.isRequired,
+    bridge: PropTypes.shape({
+    }).isRequired,
     schema: SimpleSchema.isRequired,
     metaSchema: SimpleSchema,
   }).isRequired,
+  cursorKey: PropTypes.string,
+};
+
+Datatable.defaultProps = {
+  cursorKey: 'default',
 };
 
 export function CollectionName({ autoCollection }) {

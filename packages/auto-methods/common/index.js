@@ -22,7 +22,11 @@ class AutoCollection {
     /**
      * This gets the Schema and the Meta Schema merged together
      */
-    this.collection.attachSchema(new SimpleSchema({}).extend(collectionDef.schema).extend(collectionDef.metaSchema));
+    this.collection.attachSchema(
+      new SimpleSchema({})
+        .extend(collectionDef.schema)
+        .extend(collectionDef.metaSchema),
+    );
     /**
      * will be checked before any insert, update or remove
      */
