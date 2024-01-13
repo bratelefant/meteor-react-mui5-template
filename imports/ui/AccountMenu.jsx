@@ -19,7 +19,7 @@ import { useCurrentUser } from './UserProvider';
 function AccountMenu() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation(['bratelefant_mrm-locales']);
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useCurrentUser();
 
