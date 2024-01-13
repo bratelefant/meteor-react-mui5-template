@@ -4,7 +4,8 @@
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 import React from 'react';
 import {
-  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography,
+  Alert,
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Snackbar, Typography,
 } from '@mui/material';
 import { useFind, useSubscribe } from 'meteor/react-meteor-data';
 import { DataGrid, GridActionsCellItem, GridToolbarContainer } from '@mui/x-data-grid';
@@ -45,6 +46,7 @@ function EditToolbar({ bridge, autoCollection }) {
 
 export function Datatable({ autoCollection }) {
   const [deleteOpen, setDeleteOpen] = React.useState(undefined);
+  const [error, setError] = React.useState(undefined);
   const loading = useSubscribe(`${autoCollection.collectionName}.all`);
   const data = useFind(() => autoCollection.collection.find({}, { limit: 100 }), []);
 
@@ -81,11 +83,13 @@ export function Datatable({ autoCollection }) {
         slotProps={{ toolbar: { bridge: autoCollection.bridge, autoCollection } }}
         rows={data}
         editMode="row"
-        processRowUpdate={(updateRow, { _id }) => {
-          Meteor.callAsync(`${autoCollection.collectionName}.update`, _id, { $set: updateRow });
+        processRowUpdate={async (updateRow, { _id }) => {
+          await Meteor.callAsync(`${autoCollection.collectionName}.update`, _id, { $set: updateRow });
           return updateRow;
         }}
-        onProcessRowUpdateError={(error) => console.log(error)}
+        onProcessRowUpdateError={(err) => {
+          setError(err?.reason);
+        }}
         columns={[...autoCollection.columns(), {
           field: 'actions',
           type: 'actions',
@@ -104,6 +108,16 @@ export function Datatable({ autoCollection }) {
         loading={loading()}
         getRowId={(row) => row._id}
       />
+      <Snackbar
+        open={!!error}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        autoHideDuration={6000}
+        onClose={() => setError(undefined)}
+      >
+        <Alert onClose={() => setError(undefined)} severity="error" sx={{ width: '100%' }}>
+          {error}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

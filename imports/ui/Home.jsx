@@ -4,7 +4,7 @@
  * @locus Client
  * @module imports/ui/Home
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentUser } from './UserProvider';
@@ -20,7 +20,7 @@ function Home() {
   const navigate = useNavigate();
   const user = useCurrentUser();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!user?._id) navigate('/login');
   }, [user?._id]);
 

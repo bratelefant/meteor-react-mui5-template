@@ -12,7 +12,7 @@ const TasksDefinition = {
     title: {
       type: String,
       label: 'Title',
-      max: 200,
+      max: 2,
     },
     completed: {
       type: Boolean,
@@ -22,12 +22,8 @@ const TasksDefinition = {
     createdAt: {
       type: Date,
       label: 'Created At',
-      optional: true,
-      autoValue: () => {
-        if (this.isInsert) {
-          return new Date();
-        }
-      },
+      defaultValue: new Date(),
+
     },
   }),
 };
