@@ -13,6 +13,9 @@
   },
   "Datatable": {
     "addRecord": "Add Record",
-    "actions": "Actions"
+    "actions": "Actions",
+    "error": {
+      "notAuthorized": "You are not authorized to perform this action"
+    }
   }
 }

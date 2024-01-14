@@ -43,6 +43,8 @@ class AutoCollection {
   }
 
   columns() {
+    // Client only, only for DataGrid definition
+    if (Meteor.isServer) return undefined;
     const { schema } = this;
     const schemaKeys = schema.objectKeys();
     const columns = schemaKeys.map((key) => {
@@ -78,6 +80,8 @@ class AutoCollection {
           })
           : schema.getDefinition(key).label,
         type: columnType,
+        minWidth: 100,
+        flex: 1,
         valueOptions,
         editable: true,
       };

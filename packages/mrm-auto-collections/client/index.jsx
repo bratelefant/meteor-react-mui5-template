@@ -267,8 +267,12 @@ export function Datatable({ autoCollection, cursorKey = 'default' }) {
 
   const handleDeleteClick = useCallback(
     async (id) => {
-      await Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
-      setDeleteOpen(undefined);
+      try {
+        await Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
+        setDeleteOpen(undefined);
+      } catch (e) {
+        setError(t(e?.reason));
+      }
     },
     [autoCollection.collectionName],
   );
@@ -318,10 +322,11 @@ export function Datatable({ autoCollection, cursorKey = 'default' }) {
               _id,
               { $set: updateRow },
             );
+
             return updateRow;
           }}
           onProcessRowUpdateError={(err) => {
-            setError(err?.reason);
+            setError(t(err?.reason));
           }}
           columns={[
             ...autoCollection.columns(),

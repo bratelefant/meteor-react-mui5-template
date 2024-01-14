@@ -6,13 +6,24 @@ const TasksDefinition = {
   cursors: {
     default: {
       sel: () => ({ _createdBy: Meteor.userId() }),
-      opt: () => ({ sort: { _createdAt: -1 } }),
+      opt: () => ({
+        fields: {
+          _createdAt: 1, _createdBy: 1, completed: 1, dueDate: 1, title: 1,
+        },
+        sort: { _createdAt: -1 },
+      }),
     },
   },
   policyChecks: {
     insert: async () => Meteor.userId(),
-    update: async () => Meteor.userId(),
-    remove: async () => Meteor.userId(),
+    update: async ([selector], collection) => {
+      const item = await collection.findOneAsync(selector);
+      return Meteor.userId() && item?._createdBy === Meteor.userId();
+    },
+    remove: async ([selector], collection) => {
+      const item = await collection.findOneAsync(selector);
+      return Meteor.userId() && item?._createdBy === Meteor.userId() && !item?.completed;
+    },
   },
   locales: {
     de: {
@@ -51,12 +62,6 @@ const TasksDefinition = {
         }
         return undefined;
       },
-    },
-    select: {
-      type: String,
-      label: 'Completed',
-      optional: true,
-      allowedValues: ['a', 'b', 'c'],
     },
     completed: {
       type: Boolean,

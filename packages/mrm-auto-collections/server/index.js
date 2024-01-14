@@ -11,11 +11,7 @@ class AutoCollectionController {
       },
       {
         name: 'update',
-        operation: async (sel, mod, opt) => this.autoCollection.collection.updateAsync(
-          sel,
-          mod,
-          opt,
-        ),
+        operation: async (sel, mod, opt) => this.autoCollection.collection.updateAsync(sel, mod, opt),
       },
       {
         name: 'remove',
@@ -39,9 +35,12 @@ class AutoCollectionController {
             ) {
               const check = await this.autoCollection.policyChecks[
                 this.methods[i].name
-              ](args);
+              ](args, this.autoCollection.collection);
               if (!check) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error(
+                  'not-authorized',
+                  'Datatable.error.notAuthorized',
+                );
               }
             }
             /**
@@ -59,13 +58,7 @@ class AutoCollectionController {
 
   registerPublications() {
     Object.entries(this.autoCollection.cursors).forEach(([name, props]) => {
-      Meteor.publish(
-        `${this.autoCollection.collectionName}.${name}`,
-        () => this.autoCollection.collection.find(
-          props.sel(),
-          props.opt(),
-        ),
-      );
+      Meteor.publish(`${this.autoCollection.collectionName}.${name}`, () => this.autoCollection.collection.find(props.sel(), props.opt()));
     });
   }
 }
