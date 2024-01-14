@@ -32,10 +32,18 @@ import {
   AutoField,
   ErrorsField,
   SubmitField,
+  ListField,
+  BoolField,
+  DateField,
+  NumField,
+  NestField,
+  RadioField,
+  SelectField,
+  TextField,
 } from 'uniforms-mui';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'uniforms';
+import { createAutoField, useField } from 'uniforms';
 
 checkNpmVersions({
   '@mui/icons-material': '^5.15.2',
@@ -43,29 +51,134 @@ checkNpmVersions({
   '@mui/x-data-grid': '^6.18.7',
 });
 
-function CustomAutoField({ label, ...props }) {
+function TranslatedTextField(rawProps) {
   const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
-
-  // Übersetzen Sie das Label basierend auf dem Namen des Feldes
-  const newLabel = t(`column.${label}`);
-
-  return <AutoField {...props} label={newLabel} />;
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <TextField {...props} placeholder={newLabel} label={newLabel} />;
 }
 
-function CustomAutoFields() {
-  const { schema } = useForm();
-  return (
-    <div>
-      {schema.getSubfields().map((fieldName) => (
-        <CustomAutoField
-          key={fieldName}
-          name={fieldName}
-          {...schema.getField(fieldName)}
-        />
-      ))}
-    </div>
-  );
+TranslatedTextField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+function TranslatedRadioField(rawProps) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <RadioField {...props} placeholder={newLabel} label={newLabel} />;
 }
+
+TranslatedRadioField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+function TranslatedSelectField(rawProps) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <SelectField {...props} placeholder={newLabel} label={newLabel} />;
+}
+
+TranslatedSelectField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+function TranslatedListField(rawProps) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <ListField {...props} placeholder={newLabel} label={newLabel} />;
+}
+
+TranslatedListField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+function TranslatedBoolField(rawProps) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <BoolField {...props} placeholder={newLabel} label={newLabel} />;
+}
+
+TranslatedBoolField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+function TranslatedDateField(rawProps) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <DateField {...props} placeholder={newLabel} label={newLabel} />;
+}
+
+TranslatedDateField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+function TranslatedNumField(rawProps) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <NumField {...props} placeholder={newLabel} label={newLabel} />;
+}
+
+TranslatedNumField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+TranslatedNumField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+function TranslatedNestField(rawProps) {
+  const { t } = useTranslation(['bratelefant_mrm-auto-collections']);
+  const { name } = rawProps;
+  const [props] = useField(name, rawProps);
+  const newLabel = t(`column.${props.label}`);
+  return <NestField {...props} placeholder={newLabel} label={newLabel} />;
+}
+
+TranslatedNestField.propTypes = {
+  label: PropTypes.string.isRequired,
+};
+
+const CustomAutoField = createAutoField((props) => {
+  if (props.component) {
+    return props.component;
+  }
+
+  if (props.options) {
+    return props.checkboxes && props.fieldType !== Array
+      ? TranslatedRadioField
+      : TranslatedSelectField;
+  }
+
+  switch (props.fieldType) {
+    case Array:
+      return TranslatedListField;
+    case Boolean:
+      return TranslatedBoolField;
+    case Date:
+      return TranslatedDateField;
+    case Number:
+      return TranslatedNumField;
+    case Object:
+      return TranslatedNestField;
+    case String:
+      return TranslatedTextField;
+    default:
+      return null;
+  }
+});
 
 function EditToolbar({ bridge, autoCollection }) {
   const { t, i18n } = useTranslation(['bratelefant_mrm-auto-collections']);
@@ -181,64 +294,72 @@ export function Datatable({ autoCollection, cursorKey = 'default' }) {
     [deleteOpen, handleDeleteClick, t],
   );
 
+  const componentDetectorValue = useCallback(
+    (props, uniforms) => CustomAutoField.defaultComponentDetector(props, uniforms),
+    [],
+  );
+
   return (
-    <Box>
-      {confirmDelete()}
-      <DataGrid
-        disableRowSelectionOnClick
-        slots={{ toolbar: EditToolbar }}
-        slotProps={{
-          toolbar: { bridge: autoCollection.bridge, autoCollection },
-        }}
-        rows={data}
-        editMode="row"
-        processRowUpdate={async (updateRow, { _id }) => {
-          await Meteor.callAsync(
-            `${autoCollection.collectionName}.update`,
-            _id,
-            { $set: updateRow },
-          );
-          return updateRow;
-        }}
-        onProcessRowUpdateError={(err) => {
-          setError(err?.reason);
-        }}
-        columns={[
-          ...autoCollection.columns(),
-          {
-            field: 'actions',
-            type: 'actions',
-            headerName: t('Datatable.actions'),
-            width: 100,
-            cellClassName: 'actions',
-            getActions: ({ id }) => [
-              <GridActionsCellItem
-                icon={<DeleteIcon />}
-                label="Delete"
-                onClick={() => setDeleteOpen(id)}
-                color="secondary"
-              />,
-            ],
-          },
-        ]}
-        loading={loading()}
-        getRowId={(row) => row._id}
-      />
-      <Snackbar
-        open={!!error}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        autoHideDuration={6000}
-        onClose={() => setError(undefined)}
-      >
-        <Alert
+    // eslint-disable-next-line react/jsx-pascal-case
+    <AutoField.componentDetectorContext.Provider value={componentDetectorValue}>
+      <Box>
+        {confirmDelete()}
+        <DataGrid
+          disableRowSelectionOnClick
+          slots={{ toolbar: EditToolbar }}
+          slotProps={{
+            toolbar: { bridge: autoCollection.bridge, autoCollection },
+          }}
+          rows={data}
+          editMode="row"
+          processRowUpdate={async (updateRow, { _id }) => {
+            await Meteor.callAsync(
+              `${autoCollection.collectionName}.update`,
+              _id,
+              { $set: updateRow },
+            );
+            return updateRow;
+          }}
+          onProcessRowUpdateError={(err) => {
+            setError(err?.reason);
+          }}
+          columns={[
+            ...autoCollection.columns(),
+            {
+              field: 'actions',
+              type: 'actions',
+              headerName: t('Datatable.actions'),
+              width: 100,
+              cellClassName: 'actions',
+              getActions: ({ id }) => [
+                <GridActionsCellItem
+                  icon={<DeleteIcon />}
+                  label="Delete"
+                  onClick={() => setDeleteOpen(id)}
+                  color="secondary"
+                />,
+              ],
+            },
+          ]}
+          loading={loading()}
+          getRowId={(row) => row._id}
+        />
+        <Snackbar
+          open={!!error}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          autoHideDuration={6000}
           onClose={() => setError(undefined)}
-          severity="error"
-          sx={{ width: '100%' }}
         >
-          {error}
-        </Alert>
-      </Snackbar>
-    </Box>
+          <Alert
+            onClose={() => setError(undefined)}
+            severity="error"
+            sx={{ width: '100%' }}
+          >
+            {error}
+          </Alert>
+        </Snackbar>
+      </Box>
+    </AutoField.componentDetectorContext.Provider>
   );
 }
 

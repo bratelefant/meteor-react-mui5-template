@@ -48,13 +48,14 @@ class AutoCollection {
     const columns = schemaKeys.map((key) => {
       let columnType;
       const type = schema.getDefinition(key).type[0]?.type;
+      let valueOptions;
 
       switch (type) {
         case Boolean:
           columnType = 'boolean';
           break;
         case Date:
-          columnType = 'date';
+          columnType = 'dateTime';
           break;
         case String:
           columnType = 'string';
@@ -65,6 +66,10 @@ class AutoCollection {
         default:
           columnType = 'string';
       }
+      if (schema.getDefinition(key).type[0]?.allowedValues) {
+        columnType = 'singleSelect';
+        valueOptions = schema.getDefinition(key).type[0]?.allowedValues;
+      }
       return {
         field: key,
         headerName: this.locales
@@ -72,18 +77,8 @@ class AutoCollection {
             ns: 'bratelefant_mrm-auto-collections',
           })
           : schema.getDefinition(key).label,
-        /* preProcessEditCellProps: (params) => {
-          const modifier = { $set: { [params.field]: params.props.value } };
-          let valid;
-          try {
-            this.collection.simpleSchema().validate(modifier, { modifier: true });
-            valid = true;
-          } catch (e) {
-            valid = false;
-          }
-          return { ...params.props, error: !valid };
-        }, */
         type: columnType,
+        valueOptions,
         editable: true,
       };
     });

@@ -52,6 +52,12 @@ const TasksDefinition = {
         return undefined;
       },
     },
+    select: {
+      type: String,
+      label: 'Completed',
+      optional: true,
+      allowedValues: ['a', 'b', 'c'],
+    },
     completed: {
       type: Boolean,
       label: 'Completed',
