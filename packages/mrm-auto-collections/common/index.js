@@ -51,6 +51,8 @@ class AutoCollection {
       let columnType;
       const type = schema.getDefinition(key).type[0]?.type;
       let valueOptions;
+      let getOptionLabel;
+      let valueGetter;
 
       switch (type) {
         case Boolean:
@@ -71,6 +73,8 @@ class AutoCollection {
       if (schema.getDefinition(key).type[0]?.allowedValues) {
         columnType = 'singleSelect';
         valueOptions = schema.getDefinition(key).type[0]?.allowedValues;
+        getOptionLabel = (option) => i18next.t(`selectOptions.${option}`, { ns: 'bratelefant_mrm-auto-collections' });
+        valueGetter = ({ row }) => i18next.t(`${row[key]}`, { ns: 'bratelefant_mrm-auto-collections' });
       }
       return {
         field: key,
@@ -83,6 +87,8 @@ class AutoCollection {
         minWidth: 100,
         flex: 1,
         valueOptions,
+        getOptionLabel,
+        valueGetter,
         editable: true,
       };
     });

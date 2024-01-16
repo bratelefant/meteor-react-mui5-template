@@ -80,7 +80,12 @@ function TranslatedSelectField(rawProps) {
   const { name } = rawProps;
   const [props] = useField(name, rawProps);
   const newLabel = t(`column.${props.label}`);
-  return <SelectField {...props} placeholder={newLabel} label={newLabel} />;
+  const options = props.options.map((option) => ({
+    value: option.value,
+    label: t(`selectOptions.${option.value}`, { ns: 'bratelefant_mrm-auto-collections' }),
+  }));
+
+  return <SelectField {...props} options={options} placeholder={newLabel} label={newLabel} />;
 }
 
 TranslatedSelectField.propTypes = {

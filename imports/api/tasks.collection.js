@@ -8,7 +8,7 @@ const TasksDefinition = {
       sel: () => ({ _createdBy: Meteor.userId() }),
       opt: () => ({
         fields: {
-          _createdAt: 1, _createdBy: 1, completed: 1, dueDate: 1, title: 1,
+          _createdAt: 1, _createdBy: 1, completed: 1, dueDate: 1, title: 1, assignedTo: 1,
         },
         sort: { _createdAt: -1 },
       }),
@@ -30,14 +30,30 @@ const TasksDefinition = {
       column: {
         'Due Date': 'Fälligkeitsdatum',
         Completed: 'Erledigt',
+        'Assigned To': 'Zugewiesen an',
         Title: 'Titel',
+      },
+      selectOptions: {
+        me: 'Ich',
+        team: 'Team',
+        all: 'Alle',
+        boss: 'Chef',
+        someone: 'Jemand anderes',
       },
     },
     en: {
       column: {
         'Due Date': 'Due Date',
         Completed: 'Completed',
+        'Assigned To': 'Assigned To',
         Title: 'Title',
+      },
+      selectOptions: {
+        me: 'Me',
+        team: 'Team',
+        all: 'All',
+        boss: 'Boss',
+        someone: 'Someone else',
       },
     },
   },
@@ -62,6 +78,12 @@ const TasksDefinition = {
         }
         return undefined;
       },
+    },
+    assignedTo: {
+      type: String,
+      label: 'Assigned To',
+      optional: true,
+      allowedValues: ['me', 'team', 'all', 'boss', 'someone'],
     },
     completed: {
       type: Boolean,
