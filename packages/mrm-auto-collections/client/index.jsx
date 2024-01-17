@@ -280,7 +280,11 @@ export function Datatable({ autoCollection, cursorKey = 'default' }) {
         await Meteor.callAsync(`${autoCollection.collectionName}.remove`, id);
         setDeleteOpen(undefined);
       } catch (e) {
-        setError(t(e?.reason));
+        if (e?.reason) {
+          setError(t(e?.reason));
+        } else {
+          setError(t(`error.${e?.error}`));
+        }
       }
     },
     [autoCollection.collectionName],

@@ -201,6 +201,11 @@ class AutoCollection {
         blackbox: true,
         optional: true,
       },
+      error: {
+        type: Object,
+        blackbox: true,
+        optional: true,
+      },
     });
 
     const localesSchema = new SimpleSchema({

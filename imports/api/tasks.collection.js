@@ -22,7 +22,8 @@ const TasksDefinition = {
     },
     remove: async ([selector], collection) => {
       const item = await collection.findOneAsync(selector);
-      return Meteor.userId() && item?._createdBy === Meteor.userId() && !item?.completed;
+      if (!item?.completed) throw new Meteor.Error('taskNotCompleted');
+      return Meteor.userId() && item?._createdBy === Meteor.userId() && item?.completed;
     },
   },
   locales: {
@@ -40,6 +41,9 @@ const TasksDefinition = {
         boss: 'Chef',
         someone: 'Jemand anderes',
       },
+      error: {
+        taskNotCompleted: 'Die Aufgabe ist noch nicht erledigt und kann daher noch nicht gelöscht werden.',
+      },
     },
     en: {
       column: {
@@ -54,6 +58,9 @@ const TasksDefinition = {
         all: 'All',
         boss: 'Boss',
         someone: 'Someone else',
+      },
+      error: {
+        taskNotCompleted: 'The task is not completed and cannot be deleted.',
       },
     },
   },

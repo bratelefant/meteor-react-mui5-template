@@ -70,6 +70,7 @@ class AutoCollectionController {
               const check = await this.autoCollection.policyChecks[
                 this.methods[i].name
               ](args, this.autoCollection.collection);
+
               if (!check) {
                 throw new Meteor.Error(
                   'not-authorized',
@@ -101,6 +102,7 @@ class AutoCollectionController {
    * - collectionName.<cursorName>
    * They can be subscribed to with Meteor.subscribe from the client. We advise you to
    * use useFind and useSubscribe from the official react-meteor-data package.
+   * @returns {undefined}
    */
   registerPublications() {
     Object.entries(this.autoCollection.cursors).forEach(([name, props]) => {
