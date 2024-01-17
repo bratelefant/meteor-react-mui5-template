@@ -90,6 +90,10 @@ function TranslatedSelectField(rawProps) {
 
 TranslatedSelectField.propTypes = {
   label: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 function TranslatedListField(rawProps) {

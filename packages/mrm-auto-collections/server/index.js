@@ -1,5 +1,20 @@
 /**
  * @locus Server
+ * @class AutoCollectionController
+ * @summary This class is used to register the methods and publications for a collection
+ * that is automatically created and managed by the package.
+ * @description This is super-quick way to get all basic CRUD operations for a collection.
+ * The package will automatically create the collection, the methods and the publications
+ * for you.
+ * Since the AutoCollection constructor forces you to provide policy checks for the methods,
+ * you can be sure that the methods are only called by authorized users.
+ * You also need to provide a default cursor for the collection.
+ * @param {AutoCollection} autoCollection - The AutoCollection instance to register the methods
+ * and publications for.
+ * @example
+ * const myAutoCollection = new AutoCollection(myAutoCollectionDefinition);
+ * myAutoCollection.registerMethods();
+ * myAutoCollection.registerPublications();
  */
 class AutoCollectionController {
   constructor(autoCollection) {
