@@ -4,7 +4,7 @@
  * @locus Client
  * @module imports/ui/Login
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -37,6 +37,12 @@ function Login() {
       }
     });
   };
+
+  useEffect(() => {
+    if (Meteor.userId()) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <>

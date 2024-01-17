@@ -26,7 +26,11 @@ class AutoCollectionController {
       },
       {
         name: 'update',
-        operation: async (sel, mod, opt) => this.autoCollection.collection.updateAsync(sel, mod, opt),
+        operation: async (sel, mod, opt) => this.autoCollection.collection.updateAsync(
+          sel,
+          mod,
+          opt,
+        ),
       },
       {
         name: 'remove',
@@ -35,6 +39,21 @@ class AutoCollectionController {
     ];
   }
 
+  /**
+   * @locus Server
+   * @memberOf AutoCollectionController
+   * @name registerMethods - Registers the methods for the collection
+   * @summary Registers the methods for the collection
+   * @description Registers the methods for the collection
+   * The methods are registered with the following names:
+   * - collectionName.insert
+   * - collectionName.update
+   * - collectionName.remove
+   * They can be called with Meteor.callAsync from the client.
+   * Before the operation is performed, the policy check is called.
+   * If the policy check returns false, the operation is not performed.
+   * @returns {undefined}
+   */
   registerMethods() {
     for (let i = 0; i < this.methods.length; i += 1) {
       Meteor.methods({
@@ -71,6 +90,18 @@ class AutoCollectionController {
     }
   }
 
+  /**
+   * @locus Server
+   * @memberOf AutoCollectionController
+   * @name registerPublications - Registers the publications for the collection
+   * @summary Registers the publications for the collection
+   * @description Registers the publications for the collection
+   * The publications are registered with the following names:
+   * - collectionName.default
+   * - collectionName.<cursorName>
+   * They can be subscribed to with Meteor.subscribe from the client. We advise you to
+   * use useFind and useSubscribe from the official react-meteor-data package.
+   */
   registerPublications() {
     Object.entries(this.autoCollection.cursors).forEach(([name, props]) => {
       Meteor.publish(`${this.autoCollection.collectionName}.${name}`, () => this.autoCollection.collection.find(props.sel(), props.opt()));
